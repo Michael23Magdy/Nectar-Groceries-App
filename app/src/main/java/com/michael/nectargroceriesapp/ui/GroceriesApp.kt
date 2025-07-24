@@ -1,29 +1,29 @@
-package com.michael.nectargroceriesapp
+package com.michael.nectargroceriesapp.ui
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.michael.nectargroceriesapp.core.presentation.test.TestScreen
+import androidx.navigation.compose.rememberNavController
+import com.michael.nectargroceriesapp.ui.navigation.AppNavHost
+import com.michael.nectargroceriesapp.ui.navigation.BottomBar
 import com.michael.nectargroceriesapp.ui.theme.NectarGroceriesAppTheme
 
 @Composable
 fun GroceriesApp(
     modifier: Modifier = Modifier,
 ) {
+    val navController = rememberNavController()
     NectarGroceriesAppTheme {
         Scaffold (
+            bottomBar = { BottomBar(navController) },
             modifier = modifier.fillMaxSize()
         ) { innerPadding ->
-            Column(
+            AppNavHost(
+                navController = navController,
                 modifier = Modifier.padding(innerPadding)
-            ) {
-                Text(text = "Hello World")
-                TestScreen()
-            }
+            )
         }
 
     }

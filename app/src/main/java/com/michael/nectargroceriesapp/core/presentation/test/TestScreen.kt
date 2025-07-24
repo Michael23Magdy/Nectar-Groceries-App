@@ -6,20 +6,15 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun TestScreen(
-    viewModel: TestViewModel = hiltViewModel()
+    name: String = "Test"
 ) {
-    val categories = viewModel.categories.collectAsState()
-    val product = viewModel.product.collectAsState()
-    LazyColumn {
-        item{
-            Text(text = product.value.toString())
-        }
-        items(categories.value){ category ->
-            Card {Text(text = category.toString())}
-        }
-    }
+    Text(
+        text = name,
+        fontSize = 60.sp
+    )
 }
