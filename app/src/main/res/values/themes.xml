@@ -2,15 +2,5 @@
 
 
 <resources>
-<style name="Theme.NectarGroceriesApp" parent="Theme.Material3.DayNight.NoActionBar">
-    <!-- Splash screen background -->
-    <item name="android:windowSplashScreenBackground">#55B86C</item>
-
-    <!-- Optional: legacy window background if splash disappears too fast -->
-    <item name="android:windowBackground">@drawable/splash_screen_background</item>
-
-    <!-- Splash icon (won’t crop if transparent and not forced into a circle) -->
-    <item name="android:windowSplashScreenAnimatedIcon">@drawable/nectar_logo</item>
-    <item name="android:windowSplashScreenIconBackground">?android:colorTransparent</item>
-</style>
+    <style name="Theme.NectarGroceriesApp" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
