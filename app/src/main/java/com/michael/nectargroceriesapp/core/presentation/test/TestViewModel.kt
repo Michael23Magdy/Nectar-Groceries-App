@@ -20,7 +20,7 @@ class TestViewModel @Inject constructor(
         initialValue = emptyList()
     )
 
-    val product = coreUseCases.getProduct(1).stateIn(
+val product = coreUseCases.getProduct(1).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = null
