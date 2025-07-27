@@ -26,7 +26,7 @@ private val LightColorScheme = lightColorScheme(
     surface = Color(0xFFFFFBFE),
     onSecondary = Color.White,
     onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
+    onBackground = onBackground,
     onSurface = Color(0xFF1C1B1F),
 )
 
@@ -50,6 +50,7 @@ fun NectarGroceriesAppTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = shapes,
         content = content
     )
 }

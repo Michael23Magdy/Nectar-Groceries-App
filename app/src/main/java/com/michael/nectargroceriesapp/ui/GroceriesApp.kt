@@ -15,7 +15,9 @@ fun GroceriesApp(
     modifier: Modifier = Modifier,
 ) {
     val navController = rememberNavController()
-    NectarGroceriesAppTheme {
+    NectarGroceriesAppTheme(
+        dynamicColor = false
+    ) {
         Scaffold (
             bottomBar = { BottomBar(navController) },
             modifier = modifier.fillMaxSize()
