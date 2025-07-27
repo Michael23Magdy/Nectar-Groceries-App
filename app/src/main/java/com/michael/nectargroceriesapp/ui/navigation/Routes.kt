@@ -1,16 +1,20 @@
 package com.michael.nectargroceriesapp.ui.navigation
 
-sealed class Screen(val route: String) {
-    object WelcomeScreen : Screen("welcome")
+sealed class Routes(val route: String) {
+    object WelcomeRoutes : Routes("welcome")
 
-    object HomeScreen : Screen("home")
-    object ProductScreen : Screen("product")
+    object HomeRoutes : Routes("home")
+    object ProductRoutes : Routes("product/{productId}") {
+        fun createRoute(productId: Int) = "product/$productId"
+    }
 
-    object ExploreScreen : Screen("explore")
-    object CategoryScreen : Screen("category")
+    object ExploreRoutes : Routes("explore")
+    object CategoryRoutes : Routes("category/{categoryId}") {
+        fun createRoute(categoryId: String) = "category/$categoryId"
+    }
 
-    object SearchScreen : Screen("search")
+    object SearchRoutes : Routes("search")
 
-    object CartScreen : Screen("cart")
-    object OrderAcceptedScreen : Screen("order_accepted")
+    object CartRoutes : Routes("cart")
+    object OrderAcceptedRoutes : Routes("order_accepted")
 }

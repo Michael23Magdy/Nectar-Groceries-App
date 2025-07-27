@@ -15,31 +15,31 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.HomeScreen.route,
+        startDestination = Routes.HomeRoutes.route,
         modifier = modifier
     ){
-        composable(Screen.WelcomeScreen.route) {
+        composable(Routes.WelcomeRoutes.route) {
             TestScreen("welcome")
         }
-        composable(Screen.HomeScreen.route) {
+        composable(Routes.HomeRoutes.route) {
             TestScreen("home")
         }
-        composable(Screen.ProductScreen.route) {
+        composable(Routes.ProductRoutes.route) {
             TestScreen("product")
         }
-        composable(Screen.ExploreScreen.route) {
+        composable(Routes.ExploreRoutes.route) {
             TestScreen("Explore")
         }
-        composable(Screen.CategoryScreen.route) {
+        composable(Routes.CategoryRoutes.route) {
             TestScreen("Category")
         }
-        composable(Screen.SearchScreen.route) {
+        composable(Routes.SearchRoutes.route) {
             TestScreen("Search")
         }
-        composable(Screen.CartScreen.route) {
+        composable(Routes.CartRoutes.route) {
             TestScreen("Cart")
         }
-        composable(Screen.OrderAcceptedScreen.route) {
+        composable(Routes.OrderAcceptedRoutes.route) {
             TestScreen("Order")
         }
 
