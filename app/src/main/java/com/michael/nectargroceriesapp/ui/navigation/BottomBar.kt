@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,31 +50,43 @@ fun BottomBar(navController: NavHostController) {
         NavigationBar(
             containerColor = MaterialTheme.colorScheme.background
         ) {
-            NavigationBarItem(
-                selected = currentRoute(navController) == Routes.HomeScreen.route,
-                onClick = { navController.navigate(Routes.HomeScreen.route) },
-                icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                label = { Text("Home") },
-                colors = colors
-            )
-            NavigationBarItem(
-                selected = currentRoute(navController) == Routes.ExploreScreen.route,
-                onClick = { navController.navigate(Routes.ExploreScreen.route) },
-                icon = { Icon(Icons.Default.Search, contentDescription = "Explore") },
-                label = { Text("Explore") },
-                colors = colors
-            )
-            NavigationBarItem(
-                selected = currentRoute(navController) == Routes.CartScreen.route,
-                onClick = { navController.navigate(Routes.CartScreen.route) },
-                icon = { Icon(Icons.Default.ShoppingCart, contentDescription = "Cart") },
-                label = { Text("Cart") },
-                colors = colors
-            )
+            bottomNavItems.forEach { item ->
+                NavigationBarItem(
+                    selected = currentRoute(navController) == item.route,
+                    onClick = { navController.safeNavigateSingleTopTo(item.route) },
+                    icon = { Icon(item.icon, contentDescription = item.label) },
+                    label = { Text(item.label) },
+                    colors = colors
+                )
+            }
         }
     }
 
 }
+
+private data class BottomNavItem(
+    val route: String,
+    val icon: ImageVector,
+    val label: String
+)
+private val bottomNavItems = listOf(
+    BottomNavItem(
+        route = Routes.HomeScreen.route,
+        icon = Icons.Default.Home,
+        label = "Home"
+    ),
+    BottomNavItem(
+        route = Routes.ExploreScreen.route,
+        icon = Icons.Default.Search,
+        label = "Explore"
+    ),
+    BottomNavItem(
+        route = Routes.CartScreen.route,
+        icon = Icons.Default.ShoppingCart,
+        label = "Cart"
+    )
+)
+
 
 @Composable
 fun currentRoute(navController: NavHostController): String? {
