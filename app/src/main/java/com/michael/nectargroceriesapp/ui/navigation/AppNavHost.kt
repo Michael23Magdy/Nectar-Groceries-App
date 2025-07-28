@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.michael.nectargroceriesapp.core.presentation.test.TestScreen
+import com.michael.nectargroceriesapp.feature_home_screen.presentation.HomeScreen
 
 @Composable
 fun AppNavHost(
@@ -15,31 +16,31 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.HomeRoutes.route,
+        startDestination = Routes.HomeScreen.route,
         modifier = modifier
     ){
-        composable(Routes.WelcomeRoutes.route) {
+        composable(Routes.WelcomeScreen.route) {
             TestScreen("welcome")
         }
-        composable(Routes.HomeRoutes.route) {
-            TestScreen("home")
+        composable(Routes.HomeScreen.route) {
+            HomeScreen(navController)
         }
-        composable(Routes.ProductRoutes.route) {
+        composable(Routes.ProductScreen.route) {
             TestScreen("product")
         }
-        composable(Routes.ExploreRoutes.route) {
+        composable(Routes.ExploreScreen.route) {
             TestScreen("Explore")
         }
-        composable(Routes.CategoryRoutes.route) {
+        composable(Routes.CategoryScreen.route) {
             TestScreen("Category")
         }
-        composable(Routes.SearchRoutes.route) {
+        composable(Routes.SearchScreen.route) {
             TestScreen("Search")
         }
-        composable(Routes.CartRoutes.route) {
+        composable(Routes.CartScreen.route) {
             TestScreen("Cart")
         }
-        composable(Routes.OrderAcceptedRoutes.route) {
+        composable(Routes.OrderAcceptedScreen.route) {
             TestScreen("Order")
         }
 

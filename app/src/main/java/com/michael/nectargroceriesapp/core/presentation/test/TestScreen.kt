@@ -17,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun TestScreen(
-    name: String = "Test"
+    name: String = "Test",
 ) {
     Surface (
         modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
