@@ -1,7 +1,6 @@
 package com.michael.nectargroceriesapp.feature_home_screen.di
 
-import com.michael.nectargroceriesapp.core.domain.repository.CategoryRepository
-import com.michael.nectargroceriesapp.core.domain.repository.ProductRepository
+import com.michael.nectargroceriesapp.feature_filter.domain.usecase.FilterUseCases
 import com.michael.nectargroceriesapp.feature_home_screen.presentation.HomeViewModel
 import dagger.Module
 import dagger.Provides
@@ -13,10 +12,9 @@ import dagger.hilt.components.SingletonComponent
 class HomeModule {
     @Provides
     fun provideHomeViewModel(
-        productRepository: ProductRepository,
-        categoryRepository: CategoryRepository
+        filterUseCases: FilterUseCases
     ): HomeViewModel {
-        return HomeViewModel(productRepository, categoryRepository)
+        return HomeViewModel(filterUseCases)
     }
 
 }
