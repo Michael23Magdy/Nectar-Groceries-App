@@ -16,4 +16,23 @@ class ProductRepositoryImpl @Inject constructor(
     override fun getProductById(id: Int): Flow<Product> {
         return productDao.getProductById(id)
     }
+
+    override fun getProductsByCategory(categoryId: String): Flow<List<Product>> {
+        return productDao.getProductsByCategory(categoryId)
+    }
+
+    override fun getProductsBySearchQuery(query: String): Flow<List<Product>> {
+        return productDao.getProductsBySearchQuery(query)
+    }
+
+    override fun getProductsByPriceRange(
+        minPrice: Double,
+        maxPrice: Double
+    ): Flow<List<Product>> {
+        return productDao.getProductsByPriceRange(minPrice, maxPrice)
+    }
+
+    override fun getProductsByReview(review: Int): Flow<List<Product>> {
+        return productDao.getProductsByReview(review)
+    }
 }

@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.michael.nectargroceriesapp.ui.GroceriesApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

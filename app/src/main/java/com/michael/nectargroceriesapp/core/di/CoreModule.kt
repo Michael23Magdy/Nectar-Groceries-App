@@ -12,7 +12,6 @@ import com.michael.nectargroceriesapp.core.domain.repository.ProductRepository
 import com.michael.nectargroceriesapp.core.domain.usecase.CoreUseCases
 import com.michael.nectargroceriesapp.core.domain.usecase.GetCategories
 import com.michael.nectargroceriesapp.core.domain.usecase.GetProduct
-import com.michael.nectargroceriesapp.core.presentation.test.TestViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -81,9 +80,4 @@ class CoreModule {
         getCategories = getCategories,
         getProduct = getProduct
     )
-
-    @Provides
-    fun provideTestViewModel(coreUseCases: CoreUseCases): TestViewModel {
-        return TestViewModel(coreUseCases)
-    }
 }

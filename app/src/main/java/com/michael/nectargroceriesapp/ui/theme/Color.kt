@@ -13,4 +13,7 @@ val Pink40 = Color(0xFF7D5260)
 val primary = Color( 0xFF53B175)
 val onPrimary = Color( 0xFFFFFFFF)
 val secondary = Color( 0xFF000000)
-val background = Color(0xFFEDF1EB)
+val background = Color(0xFFFFFFFF)
+
+val onBackground = Color(0xFF181725)
+val onTertiary = Color(0xFF7C7C7C)
