@@ -12,9 +12,11 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -50,10 +52,11 @@ fun HomeScreenSection(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(20.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ){
-            Text(text = name)
-            Text(text = "see all")
+            Text(text = name, style = MaterialTheme.typography.titleLarge)
+            Text(text = "see all", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.primary)
         }
 
         LazyRow {
