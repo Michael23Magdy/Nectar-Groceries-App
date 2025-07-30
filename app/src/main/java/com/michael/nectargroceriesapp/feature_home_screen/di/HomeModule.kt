@@ -10,11 +10,5 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 class HomeModule {
-    @Provides
-    fun provideHomeViewModel(
-        filterUseCases: FilterUseCases
-    ): HomeViewModel {
-        return HomeViewModel(filterUseCases)
-    }
 
 }

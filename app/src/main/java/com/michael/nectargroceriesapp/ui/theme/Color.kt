@@ -17,3 +17,4 @@ val background = Color(0xFFFFFFFF)
 
 val onBackground = Color(0xFF181725)
 val onTertiary = Color(0xFF7C7C7C)
+val surface = Color(0xFFF2F3F2)

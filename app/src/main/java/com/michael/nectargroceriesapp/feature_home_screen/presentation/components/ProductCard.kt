@@ -1,10 +1,8 @@
 package com.michael.nectargroceriesapp.feature_home_screen.presentation.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -30,10 +27,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.michael.nectargroceriesapp.core.domain.model.Product
+import com.michael.nectargroceriesapp.core.presentation.test.components.NectarButton
+import com.michael.nectargroceriesapp.ui.navigation.Routes
 
 @Composable
 fun ProductCard(
     product: Product,
+    onClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ){
     Card(
@@ -44,7 +44,8 @@ fun ProductCard(
             containerColor = Color.White,
             contentColor = MaterialTheme.colorScheme.onBackground
         ),
-        border = BorderStroke(1.dp, Color(0xFFE2E2E2)), // 👈 border here
+        border = BorderStroke(1.dp, Color(0xFFE2E2E2)),
+        onClick = { onClick(Routes.ProductScreen.createRoute(product.id)) }
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
@@ -86,28 +87,15 @@ fun ProductCard(
                     .fillMaxWidth()
             ){
                 Text(text = "$${product.price}")
-                AddButton(onClick = {})
+                NectarButton(onClick = {}){
+                    Icon(imageVector =  Icons.Default.Add, contentDescription = null)
+                }
             }
         }
     }
 
 }
 
-@Composable
-fun AddButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Button(
-        onClick = onClick,
-        modifier = modifier
-            .size(45.dp),
-        shape = MaterialTheme.shapes.large,
-        contentPadding = PaddingValues(0.dp)
-    ) {
-        Icon(imageVector = Icons.Default.Add, contentDescription = null)
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
@@ -127,6 +115,7 @@ fun previewCard(){
                 "test" to "test"
             ),
             3
-        )
+        ),
+        {}
     )
 }
