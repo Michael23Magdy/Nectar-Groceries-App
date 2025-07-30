@@ -39,6 +39,7 @@ import com.michael.nectargroceriesapp.core.presentation.components.NectarDivider
 import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.components.Expandable
 import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.components.NumberSelector
 import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.components.StarRating
+import com.michael.nectargroceriesapp.ui.navigation.BackButton
 
 @Composable
 fun ProductDetailsScreenRoot(
@@ -80,16 +81,7 @@ fun ProductDetailsScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TextButton(
-                    onClick = { navController.popBackStack() },
-                    modifier = Modifier
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.rounded_keyboard_arrow_left_24),
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground,
-                    )
-                }
+                BackButton(navController)
                 val context = LocalContext.current
                 TextButton(
                     onClick = { shareTextWithImageLink(context,

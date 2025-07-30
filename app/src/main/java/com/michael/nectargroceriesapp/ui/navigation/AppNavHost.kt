@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.michael.nectargroceriesapp.core.presentation.test.TestScreen
+import com.michael.nectargroceriesapp.feature_explore_screen.presentation.ExploreScreen
 import com.michael.nectargroceriesapp.feature_home_screen.presentation.HomeScreen
 import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.ProductDetailsScreenRoot
 import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.ProductDetailsViewModel
@@ -38,7 +39,7 @@ fun AppNavHost(
             ProductDetailsScreenRoot(navController, viewModel)
         }
         composable(Routes.ExploreScreen.route) {
-            TestScreen("Explore")
+            ExploreScreen(navController)
         }
         composable(Routes.CategoryScreen.route) {
             TestScreen("Category")
