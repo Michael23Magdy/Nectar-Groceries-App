@@ -8,8 +8,8 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import com.michael.nectargroceriesapp.ui.theme.orange
 
 @Composable
 fun StarRating(
@@ -27,7 +27,7 @@ fun StarRating(
             Icon(
                 imageVector = Icons.Default.Star,
                 contentDescription = null,
-                tint = Color(0xFFF3603F),
+                tint = orange,
                 modifier = Modifier.size(iconSize)
             )
         }
@@ -36,7 +36,7 @@ fun StarRating(
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = null,
-                    tint = Color(0xFFF3603F).copy(alpha = 0.4f),
+                    tint = orange.copy(alpha = 0.4f),
                     modifier = Modifier.size(iconSize)
                 )
             }
