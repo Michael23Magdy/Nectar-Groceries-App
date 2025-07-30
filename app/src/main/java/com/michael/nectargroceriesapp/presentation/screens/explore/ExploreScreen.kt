@@ -33,7 +33,7 @@ fun ExploreScreen(
             modifier = Modifier.fillMaxWidth().padding(20.dp),
             textAlign = TextAlign.Center
         )
-        SearchBar("", {}, modifier = Modifier.padding(20.dp, 0.dp))
+        SearchBar(navController, modifier = Modifier.padding(20.dp, 0.dp))
 
         LazyTwoColVerticalGrid {
             items(categories.value) { category ->

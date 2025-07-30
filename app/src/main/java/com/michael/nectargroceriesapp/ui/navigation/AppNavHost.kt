@@ -16,6 +16,8 @@ import com.michael.nectargroceriesapp.presentation.screens.explore.ExploreScreen
 import com.michael.nectargroceriesapp.presentation.screens.home.HomeScreen
 import com.michael.nectargroceriesapp.presentation.screens.product_details.ProductDetailsScreenRoot
 import com.michael.nectargroceriesapp.presentation.screens.product_details.ProductDetailsViewModel
+import com.michael.nectargroceriesapp.presentation.screens.search.SearchScreen
+import com.michael.nectargroceriesapp.presentation.screens.search.SearchViewModel
 
 @Composable
 fun AppNavHost(
@@ -50,8 +52,12 @@ fun AppNavHost(
             val viewModel: CategoryViewModel = hiltViewModel()
             CategoryScreenRoot(navController, viewModel)
         }
-        composable(Routes.SearchScreen.route) {
-            TestScreen("Search")
+        composable(
+            Routes.SearchScreen.route,
+            arguments = listOf(navArgument("query") { type = NavType.StringType })
+        ) {
+            val viewModel: SearchViewModel = hiltViewModel()
+            SearchScreen(navController, viewModel)
         }
         composable(Routes.CartScreen.route) {
             TestScreen("Cart")
