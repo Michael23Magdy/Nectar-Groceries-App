@@ -50,8 +50,7 @@ fun HomeScreen(
         HomeScreenHeader()
         Spacer(modifier = Modifier.size(20.dp))
         SearchBar(
-            query = "",
-            onQueryChange = {},
+            navController,
             modifier = Modifier
                 .padding(horizontal = 20.dp)
         )

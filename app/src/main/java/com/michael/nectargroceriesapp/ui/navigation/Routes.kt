@@ -13,7 +13,9 @@ sealed class Routes(val route: String) {
         fun createRoute(categoryId: String) = "category/$categoryId?ts=${System.currentTimeMillis()}"
     }
 
-    object SearchScreen : Routes("search")
+    object SearchScreen : Routes("search/{query}") {
+        fun createRoute(query: String) = "search/$query?ts=${System.currentTimeMillis()}"
+    }
 
     object CartScreen : Routes("cart")
     object OrderAcceptedScreen : Routes("order_accepted")
