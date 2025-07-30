@@ -9,11 +9,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.michael.nectargroceriesapp.core.presentation.test.TestScreen
-import com.michael.nectargroceriesapp.feature_explore_screen.presentation.ExploreScreen
-import com.michael.nectargroceriesapp.feature_home_screen.presentation.HomeScreen
-import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.ProductDetailsScreenRoot
-import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.ProductDetailsViewModel
+import com.michael.nectargroceriesapp.presentation.screens.test.TestScreen
+import com.michael.nectargroceriesapp.presentation.screens.category.CategoryScreen
+import com.michael.nectargroceriesapp.presentation.screens.category.CategoryViewModel
+import com.michael.nectargroceriesapp.presentation.screens.explore.ExploreScreen
+import com.michael.nectargroceriesapp.presentation.screens.home.HomeScreen
+import com.michael.nectargroceriesapp.presentation.screens.product_details.ProductDetailsScreenRoot
+import com.michael.nectargroceriesapp.presentation.screens.product_details.ProductDetailsViewModel
 
 @Composable
 fun AppNavHost(
@@ -41,8 +43,12 @@ fun AppNavHost(
         composable(Routes.ExploreScreen.route) {
             ExploreScreen(navController)
         }
-        composable(Routes.CategoryScreen.route) {
-            TestScreen("Category")
+        composable(
+            Routes.CategoryScreen.route,
+            arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
+        ) {
+            val viewModel: CategoryViewModel = hiltViewModel()
+            CategoryScreen(navController, viewModel)
         }
         composable(Routes.SearchScreen.route) {
             TestScreen("Search")

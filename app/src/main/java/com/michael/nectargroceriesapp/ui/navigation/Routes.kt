@@ -10,7 +10,7 @@ sealed class Routes(val route: String) {
 
     object ExploreScreen : Routes("explore")
     object CategoryScreen : Routes("category/{categoryId}") {
-        fun createRoute(categoryId: String) = "category/$categoryId"
+        fun createRoute(categoryId: String) = "category/$categoryId?ts=${System.currentTimeMillis()}"
     }
 
     object SearchScreen : Routes("search")
