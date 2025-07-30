@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.michael.nectargroceriesapp.core.presentation.test.TestScreen
 import com.michael.nectargroceriesapp.feature_home_screen.presentation.HomeScreen
-import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.ProductDetailsScreen
+import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.ProductDetailsScreenRoot
 import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.ProductDetailsViewModel
 
 @Composable
@@ -35,7 +35,7 @@ fun AppNavHost(
             arguments = listOf(navArgument("productId") { type = NavType.IntType })
         ) {
             val viewModel: ProductDetailsViewModel = hiltViewModel()
-            ProductDetailsScreen(navController, viewModel)
+            ProductDetailsScreenRoot(navController, viewModel)
         }
         composable(Routes.ExploreScreen.route) {
             TestScreen("Explore")

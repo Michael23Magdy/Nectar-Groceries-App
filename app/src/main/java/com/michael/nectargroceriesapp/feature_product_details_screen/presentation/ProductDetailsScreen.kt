@@ -7,19 +7,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.DividerDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -30,28 +24,40 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.michael.nectargroceriesapp.core.presentation.test.components.OutlinedNectarButton
-import com.michael.nectargroceriesapp.core.presentation.test.components.TextNectarButton
-import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.components.Expandable
 import com.michael.nectargroceriesapp.R
-import com.michael.nectargroceriesapp.ui.theme.background
-import com.michael.nectargroceriesapp.ui.theme.shapes
+import com.michael.nectargroceriesapp.core.domain.model.Product
+import com.michael.nectargroceriesapp.core.presentation.UiState
+import com.michael.nectargroceriesapp.core.presentation.components.NectarButton
+import com.michael.nectargroceriesapp.core.presentation.components.NectarDivider
+import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.components.Expandable
+import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.components.NumberSelector
+import com.michael.nectargroceriesapp.feature_product_details_screen.presentation.components.StarRating
 
+@Composable
+fun ProductDetailsScreenRoot(
+    navController: NavHostController,
+    viewModel: ProductDetailsViewModel = hiltViewModel()
+) {
+    val uiState = viewModel.uiState
+    when (uiState) {
+        is UiState.Loading -> LoadingIndicator()
+        is UiState.Error -> ErrorMessage(uiState.message)
+        is UiState.Success<Product> -> ProductDetailsScreen(navController, uiState.data, viewModel)
+    }
+}
 @Composable
 fun ProductDetailsScreen(
     navController: NavHostController,
+    product: Product,
     viewModel: ProductDetailsViewModel = hiltViewModel()
 ){
-
-    // TODO: Add screen state (loading, error, success)
-
-    val product = viewModel.product
     val numberOfWantedUnits = viewModel.numberOfWantedUnits
 
     Column(
@@ -64,7 +70,7 @@ fun ProductDetailsScreen(
             color = MaterialTheme.colorScheme.surface
         ){
             AsyncImage(
-                model = product?.imageUrl,
+                model = product.imageUrl,
                 contentDescription = null,
                 modifier = Modifier.size(350.dp),
                 contentScale = ContentScale.Fit
@@ -82,11 +88,12 @@ fun ProductDetailsScreen(
                         painter = painterResource(R.drawable.rounded_keyboard_arrow_left_24),
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onBackground,
-//                        modifier = Modifier.size(40.dp)
                     )
                 }
+                val context = LocalContext.current
                 TextButton(
-                    onClick = {},
+                    onClick = { shareTextWithImageLink(context,
+                        product.name, product.imageUrl)},
                     modifier = Modifier
                 ) {
                     Icon(
@@ -105,12 +112,12 @@ fun ProductDetailsScreen(
         ) {
             Column {
                 Text(
-                    text = product?.name ?: "loading",
+                    text = product.name,
                     style = MaterialTheme.typography.displaySmall
                 )
                 Spacer(modifier = Modifier.size(10.dp))
                 Text(
-                    text = product?.detail ?: "loading",
+                    text = product.detail,
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onTertiary,
@@ -131,94 +138,99 @@ fun ProductDetailsScreen(
                 onDecrease = { viewModel.decreaseNumberOfWantedUnits() },
                 onIncrease = { viewModel.increaseNumberOfWantedUnits() },
             )
-            Text(text = "$${product?.price}", style = MaterialTheme.typography.displaySmall)
+            Text(text = "$${product.price}", style = MaterialTheme.typography.displaySmall)
         }
 
-        HorizontalDivider(Modifier.padding(start = 20.dp, end = 20.dp), DividerDefaults.Thickness, MaterialTheme.colorScheme.surface)
-        Expandable(
-            header = "Product Detail",
-            modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 20.dp)
-        ) {
-            Text(text = product?.description ?: "description", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onTertiary)
-        }
-        HorizontalDivider(Modifier.padding(start = 20.dp, end = 20.dp), DividerDefaults.Thickness, MaterialTheme.colorScheme.surface)
-        Expandable(
-            modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 20.dp),
-            header = "Nutritions",
-            hint = {
-                Text(
-                    text = product?.nutritions["carbs"] ?: "xxx",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.tertiary,
-                    modifier =  Modifier
-                        .background(
-                            color = Color(0xFFEBEBEB),
-                            shape = MaterialTheme.shapes.medium
-                        )
-                        .padding(6.dp, 3.dp))
-            }
-        ) {
-            Column {
-                product?.nutritions?.entries?.forEachIndexed{ index, (t, u) ->
-                    val backgroundColor = if (index % 2 == 0) {
-                        MaterialTheme.colorScheme.surface
-                    } else {
-                        MaterialTheme.colorScheme.background
-                    }
-                    Row (modifier = Modifier.fillMaxWidth().background(backgroundColor).padding(12.dp), horizontalArrangement = Arrangement.SpaceAround) {
-                        Text(text = t)
-                        Text(text = u)
-                    }
-                }
-            }
-        }
+        NectarDivider()
+        ProductDescriptionSection(product.description)
 
-        HorizontalDivider(Modifier.padding(start = 20.dp, end = 20.dp), DividerDefaults.Thickness, MaterialTheme.colorScheme.surface)
-        Expandable(
-            modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 20.dp),
-            header = "Review",
-            hint = {
-                Row {
-                    repeat(product?.review ?: 4) {
-                        Icon(imageVector = Icons.Default.Star, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                    }
-                }
-            }
-        ) {
-            val totalStars = 5
-            val filledStars = product?.review ?: 4
-            Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center){
-                repeat(filledStars) {
-                    Icon(Icons.Default.Star, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(50.dp))
-                }
-                repeat(totalStars - filledStars) {
-                    Icon(Icons.Default.Star, contentDescription = null, tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.4f), modifier = Modifier.size(50.dp))
-                }
-            }
+        NectarDivider()
+        NutritionSection(product.nutritions)
+
+        NectarDivider()
+        ReviewSection(product.review)
+
+        Spacer(modifier = Modifier.weight(1f))
+        NectarButton(modifier = Modifier.fillMaxWidth().height(58.dp).padding(20.dp, 0.dp), onClick = {}) {
+            Text(text = "Add to Basket", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(10.dp))
         }
     }
 
 }
 
 @Composable
-fun NumberSelector(
-    number: Int,
-    onIncrease: () -> Unit,
-    onDecrease: () -> Unit
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
+fun ProductDescriptionSection(description: String) {
+    Expandable(
+        header = "Product Detail",
+        modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 20.dp)
     ) {
-        TextNectarButton(onClick = onDecrease){
-            Icon(painter = painterResource(R.drawable.minus), contentDescription = null, tint = Color(0xFFB3B3B3))
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onTertiary)
+    }
+}
+@Composable
+fun ReviewSection(review: Int) {
+    Expandable(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp,  10.dp),
+        header = "Review",
+        hint = {
+            StarRating(
+                rating = review,
+                iconSize = 20.dp
+            )
         }
-        Spacer(modifier = Modifier.width(5.dp))
-        OutlinedNectarButton(onClick = onIncrease) {
-            Text(text = number.toString())
+    ) {
+        StarRating(
+            rating = review,
+            iconSize = 50.dp,
+            showEmptyStars = true,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+fun NutritionSection(nutritions: Map<String, String>){
+    Expandable(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp, 10.dp),
+        header = "Nutritions",
+        hint = {
+            Text(
+                text = nutritions["carbs"] ?: "",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.tertiary,
+                modifier =  Modifier
+                    .background(
+                        color = Color(0xFFEBEBEB),
+                        shape = MaterialTheme.shapes.medium
+                    )
+                    .padding(6.dp, 3.dp))
         }
-        Spacer(modifier = Modifier.width(5.dp))
-        TextNectarButton(onClick = onIncrease) {
-            Icon(painter = painterResource(R.drawable.add), contentDescription = null)
+    ) {
+        Column {
+            nutritions.entries.forEachIndexed{ index, (key, value) ->
+                val backgroundColor = if (index % 2 == 0) {
+                    MaterialTheme.colorScheme.surface
+                } else {
+                    MaterialTheme.colorScheme.background
+                }
+                Row (
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(backgroundColor)
+                        .padding(12.dp),
+                    horizontalArrangement = Arrangement.SpaceAround)
+                {
+                    Text(text = key)
+                    Text(text = value)
+                }
+            }
         }
     }
 }

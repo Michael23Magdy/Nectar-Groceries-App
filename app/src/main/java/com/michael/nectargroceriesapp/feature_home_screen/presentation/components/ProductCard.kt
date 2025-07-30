@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.michael.nectargroceriesapp.core.domain.model.Product
-import com.michael.nectargroceriesapp.core.presentation.test.components.NectarButton
+import com.michael.nectargroceriesapp.core.presentation.components.NectarButton
 import com.michael.nectargroceriesapp.ui.navigation.Routes
 
 @Composable
@@ -99,7 +99,7 @@ fun ProductCard(
 
 @Preview(showBackground = true)
 @Composable
-fun previewCard(){
+fun PreviewCard(){
     ProductCard(
         product = Product(
             1,

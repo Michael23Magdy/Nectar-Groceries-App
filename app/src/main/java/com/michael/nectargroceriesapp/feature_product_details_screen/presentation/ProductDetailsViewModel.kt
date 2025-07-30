@@ -1,6 +1,7 @@
 package com.michael.nectargroceriesapp.feature_product_details_screen.presentation
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
@@ -8,19 +9,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michael.nectargroceriesapp.core.domain.model.Product
 import com.michael.nectargroceriesapp.core.domain.usecase.GetProduct
+import com.michael.nectargroceriesapp.core.presentation.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val getProduct: GetProduct
 ): ViewModel() {
     val productId: Int = checkNotNull(savedStateHandle["productId"])
-    var product by mutableStateOf<Product?>(null)
+    var uiState by mutableStateOf<UiState<Product>>(UiState.Loading)
         private set
-    var numberOfWantedUnits by mutableStateOf(1)
+    var numberOfWantedUnits by mutableIntStateOf(1)
         private set
 
     init {
@@ -28,8 +31,13 @@ class ProductDetailsViewModel @Inject constructor(
     }
     fun loadProduct(id: Int){
         viewModelScope.launch {
-            getProduct(id).collect { result ->
-                product = result
+            delay(500)
+            getProduct(id).collect { product ->
+                product?.let {
+                    uiState = UiState.Success(product)
+                } ?: run {
+                    uiState = UiState.Error("Product not found")
+                }
             }
         }
     }
@@ -44,3 +52,4 @@ class ProductDetailsViewModel @Inject constructor(
         }
     }
 }
+

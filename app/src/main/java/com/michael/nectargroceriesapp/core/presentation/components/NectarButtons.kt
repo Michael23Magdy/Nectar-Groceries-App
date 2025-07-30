@@ -1,4 +1,4 @@
-package com.michael.nectargroceriesapp.core.presentation.test.components
+package com.michael.nectargroceriesapp.core.presentation.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
