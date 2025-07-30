@@ -11,6 +11,7 @@ import com.michael.nectargroceriesapp.domain.repository.CategoryRepository
 import com.michael.nectargroceriesapp.domain.repository.ProductRepository
 import com.michael.nectargroceriesapp.domain.usecase.CoreUseCases
 import com.michael.nectargroceriesapp.domain.usecase.GetCategories
+import com.michael.nectargroceriesapp.domain.usecase.GetCategory
 import com.michael.nectargroceriesapp.domain.usecase.GetProduct
 import dagger.Module
 import dagger.Provides
@@ -67,6 +68,12 @@ class CoreModule {
 
     @Provides
     @Singleton
+    fun provideGetCategory(categoryRepository: CategoryRepository): GetCategory {
+        return GetCategory(categoryRepository)
+    }
+
+    @Provides
+    @Singleton
     fun provideGetProduct(productDao: ProductDao): GetProduct {
         return GetProduct(productDao)
     }
@@ -75,9 +82,11 @@ class CoreModule {
     @Singleton
     fun provideCoreUseCases(
         getCategories: GetCategories,
-        getProduct: GetProduct
+        getCategory: GetCategory,
+        getProduct: GetProduct,
     ): CoreUseCases = CoreUseCases(
         getCategories = getCategories,
+        getCategory,
         getProduct = getProduct
     )
 }

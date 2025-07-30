@@ -5,11 +5,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
@@ -24,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.michael.nectargroceriesapp.domain.model.Product
@@ -33,11 +35,12 @@ import com.michael.nectargroceriesapp.ui.navigation.Routes
 fun ProductCard(
     product: Product,
     onClick: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    width: Dp = 150.dp
 ){
     Card(
-        modifier = modifier
-            .size(width = 150.dp, height = 200.dp),
+        modifier = Modifier
+            .wrapContentSize(),
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(
             containerColor = Color.White,
@@ -49,15 +52,16 @@ fun ProductCard(
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = modifier
+                .width(width)
+                .aspectRatio(ratio = 0.75f)
                 .padding(10.dp),
 
             ) {
             AsyncImage(
                 model = product.imageUrl,
                 contentDescription = product.name,
-                modifier = Modifier.height(80.dp),
+                modifier = Modifier.weight(1f),
                 contentScale = ContentScale.Inside
             )
             Column(
@@ -115,6 +119,7 @@ fun PreviewCard(){
             ),
             3
         ),
+
         {}
     )
 }

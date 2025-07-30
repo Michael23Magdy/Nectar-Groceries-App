@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.michael.nectargroceriesapp.presentation.screens.test.TestScreen
-import com.michael.nectargroceriesapp.presentation.screens.category.CategoryScreen
+import com.michael.nectargroceriesapp.presentation.screens.category.CategoryScreenRoot
 import com.michael.nectargroceriesapp.presentation.screens.category.CategoryViewModel
 import com.michael.nectargroceriesapp.presentation.screens.explore.ExploreScreen
 import com.michael.nectargroceriesapp.presentation.screens.home.HomeScreen
@@ -48,7 +48,7 @@ fun AppNavHost(
             arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
         ) {
             val viewModel: CategoryViewModel = hiltViewModel()
-            CategoryScreen(navController, viewModel)
+            CategoryScreenRoot(navController, viewModel)
         }
         composable(Routes.SearchScreen.route) {
             TestScreen("Search")

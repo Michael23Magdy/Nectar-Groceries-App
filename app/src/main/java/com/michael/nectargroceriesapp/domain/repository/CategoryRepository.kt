@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {
     fun getAllCategories(): Flow<List<Category>>
+    fun getCategoryById(name: String): Flow<Category>
 }

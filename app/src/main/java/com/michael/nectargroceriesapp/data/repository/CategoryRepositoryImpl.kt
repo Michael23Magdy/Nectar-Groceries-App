@@ -12,4 +12,8 @@ class CategoryRepositoryImpl @Inject constructor(
     override fun getAllCategories(): Flow<List<Category>> {
         return categoryDao.getAllCategories()
     }
+
+    override fun getCategoryById(name: String): Flow<Category> {
+        return categoryDao.getCategoryById(name)
+    }
 }

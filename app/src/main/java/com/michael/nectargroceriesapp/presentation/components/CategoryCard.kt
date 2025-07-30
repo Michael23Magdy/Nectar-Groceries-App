@@ -52,7 +52,7 @@ fun CategoryCard(
                 contentScale = ContentScale.Inside
             )
             Text(
-                text = category.name,
+                text = category.displayName,
                 style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Center
             )
