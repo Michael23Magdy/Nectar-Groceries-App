@@ -22,13 +22,24 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.michael.nectargroceriesapp.R
 
 @Composable
 fun BottomBar(navController: NavHostController) {
+    when(currentRoute(navController)) {
+        in listOf(Routes.HomeScreen.route, Routes.ExploreScreen.route, Routes.CartScreen.route) -> {
+            BottomNavigationBar(navController)
+        }
+        else -> {}
+    }
+}
+@Composable
+fun BottomNavigationBar(navController: NavHostController) {
     val colors = NavigationBarItemDefaults.colors(
         selectedIconColor = MaterialTheme.colorScheme.primary,
         unselectedIconColor = MaterialTheme.colorScheme.onBackground,
@@ -54,7 +65,7 @@ fun BottomBar(navController: NavHostController) {
                 NavigationBarItem(
                     selected = currentRoute(navController) == item.route,
                     onClick = { navController.safeNavigateSingleTopTo(item.route) },
-                    icon = { Icon(item.icon, contentDescription = item.label) },
+                    icon = { Icon(painter = painterResource(item.icon), contentDescription = item.label) },
                     label = { Text(item.label) },
                     colors = colors
                 )
@@ -66,23 +77,23 @@ fun BottomBar(navController: NavHostController) {
 
 private data class BottomNavItem(
     val route: String,
-    val icon: ImageVector,
+    val icon: Int,
     val label: String
 )
 private val bottomNavItems = listOf(
     BottomNavItem(
         route = Routes.HomeScreen.route,
-        icon = Icons.Default.Home,
-        label = "Home"
+        icon = R.drawable.shop,
+        label = "Shop"
     ),
     BottomNavItem(
         route = Routes.ExploreScreen.route,
-        icon = Icons.Default.Search,
+        icon = R.drawable.explore,
         label = "Explore"
     ),
     BottomNavItem(
         route = Routes.CartScreen.route,
-        icon = Icons.Default.ShoppingCart,
+        icon = R.drawable.cart,
         label = "Cart"
     )
 )

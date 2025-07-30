@@ -31,6 +31,7 @@ import com.michael.nectargroceriesapp.R
 import com.michael.nectargroceriesapp.core.domain.model.Product
 import com.michael.nectargroceriesapp.feature_filter.presentation.components.SearchBar
 import com.michael.nectargroceriesapp.feature_home_screen.presentation.components.ProductCard
+import com.michael.nectargroceriesapp.ui.navigation.safeNavigateSingleTopTo
 
 @Composable
 fun HomeScreen(
@@ -55,9 +56,10 @@ fun HomeScreen(
             modifier = Modifier
                 .padding(horizontal = 20.dp)
         )
-        HomeScreenSection("Exclusive Offer", exclusiveOfferProducts.value)
-        HomeScreenSection("Best Selling", bestSellingProducts.value)
-        HomeScreenSection("Meat & Fish", meatAndFishProducts.value)
+        //TODO: Panels
+        HomeScreenSection("Exclusive Offer", exclusiveOfferProducts.value, navController::navigate)
+        HomeScreenSection("Best Selling", bestSellingProducts.value, navController::navigate)
+        HomeScreenSection("Meat & Fish", meatAndFishProducts.value, navController::navigate)
     }
 }
 
@@ -79,6 +81,7 @@ fun HomeScreenHeader(
     ) {
         Icon(imageVector = Icons.Default.LocationOn, contentDescription = "Location Icon", tint = Color(0xFF4C4F4D))
         Text(text = "Dhaka, Banassre", style = MaterialTheme.typography.titleSmall, color = Color(0xFF4C4F4D))
+        // TODO: get real location
     }
 }
 
@@ -86,6 +89,7 @@ fun HomeScreenHeader(
 fun HomeScreenSection(
     name: String,
     list: List<Product>,
+    safeNavigate: (String) -> Unit = {},
     modifier: Modifier = Modifier
 ){
     Column(
@@ -106,7 +110,7 @@ fun HomeScreenSection(
         LazyRow {
             item{Spacer(modifier = Modifier.width(20.dp))}
             items(list) { item ->
-                ProductCard(product = item)
+                ProductCard(product = item, onClick = safeNavigate)
                 Spacer(modifier = Modifier.width(15.dp))
             }
             item{Spacer(modifier = Modifier.width(5.dp))}

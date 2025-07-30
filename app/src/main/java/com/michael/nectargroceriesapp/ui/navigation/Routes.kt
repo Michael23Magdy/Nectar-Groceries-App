@@ -5,7 +5,7 @@ sealed class Routes(val route: String) {
 
     object HomeScreen : Routes("home")
     object ProductScreen : Routes("product/{productId}") {
-        fun createRoute(productId: Int) = "product/$productId"
+        fun createRoute(productId: Int) = "product/$productId?ts=${System.currentTimeMillis()}"
     }
 
     object ExploreScreen : Routes("explore")
