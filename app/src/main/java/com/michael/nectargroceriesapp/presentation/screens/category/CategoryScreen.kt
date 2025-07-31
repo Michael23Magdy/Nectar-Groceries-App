@@ -55,7 +55,7 @@ fun CategoryScreen(
                 text = category.displayName,
                 style = MaterialTheme.typography.titleLarge
             )
-            FilterButton()
+            FilterButton({})
 
         }
         LazyTwoColVerticalGrid {
