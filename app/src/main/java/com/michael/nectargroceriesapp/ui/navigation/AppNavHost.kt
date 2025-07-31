@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.michael.nectargroceriesapp.presentation.screens.cart.CartScreen
 import com.michael.nectargroceriesapp.presentation.screens.test.TestScreen
 import com.michael.nectargroceriesapp.presentation.screens.category.CategoryScreenRoot
 import com.michael.nectargroceriesapp.presentation.screens.category.CategoryViewModel
@@ -60,7 +61,7 @@ fun AppNavHost(
             SearchScreen(navController, viewModel)
         }
         composable(Routes.CartScreen.route) {
-            TestScreen("Cart")
+            CartScreen()
         }
         composable(Routes.OrderAcceptedScreen.route) {
             TestScreen("Order")

@@ -2,11 +2,16 @@ package com.michael.nectargroceriesapp.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.michael.nectargroceriesapp.data.local.CartDao
 import com.michael.nectargroceriesapp.data.local.CategoryDao
 import com.michael.nectargroceriesapp.data.local.GroceriesDatabase
 import com.michael.nectargroceriesapp.data.local.ProductDao
+import com.michael.nectargroceriesapp.data.repository.CartRepositoryImpl
 import com.michael.nectargroceriesapp.data.repository.CategoryRepositoryImpl
 import com.michael.nectargroceriesapp.data.repository.ProductRepositoryImpl
+import com.michael.nectargroceriesapp.domain.repository.CartRepository
 import com.michael.nectargroceriesapp.domain.repository.CategoryRepository
 import com.michael.nectargroceriesapp.domain.repository.ProductRepository
 import com.michael.nectargroceriesapp.domain.usecase.CoreUseCases
@@ -23,7 +28,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class CoreModule {
-
     @Provides
     @Singleton
     fun provideDatabase(

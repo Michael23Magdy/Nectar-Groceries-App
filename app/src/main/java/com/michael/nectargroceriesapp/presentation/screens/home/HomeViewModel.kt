@@ -2,6 +2,8 @@ package com.michael.nectargroceriesapp.presentation.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.michael.nectargroceriesapp.domain.model.Cart
+import com.michael.nectargroceriesapp.domain.usecase.cart.InsertCartItem
 import com.michael.nectargroceriesapp.domain.usecase.filter.FilterUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -10,7 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val filterUseCases: FilterUseCases
+    private val filterUseCases: FilterUseCases,
+    private val insertCartItem: InsertCartItem
 ): ViewModel() {
     val exclusiveOfferProductList = filterUseCases.filterProductsByPrice(0.0, 4.0).stateIn(
         scope = viewModelScope,
@@ -27,4 +30,8 @@ class HomeViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = emptyList()
     )
+
+    fun AddToCart(productId: Int, quantity: Int) {
+        insertCartItem(Cart(productId = productId, quantity))
+    }
 }

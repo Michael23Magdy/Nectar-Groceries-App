@@ -35,6 +35,7 @@ import com.michael.nectargroceriesapp.ui.navigation.Routes
 fun ProductCard(
     product: Product,
     onClick: (String) -> Unit,
+    onAdd: () -> Unit,
     modifier: Modifier = Modifier,
     width: Dp = 150.dp
 ){
@@ -90,7 +91,7 @@ fun ProductCard(
                     .fillMaxWidth()
             ){
                 Text(text = "$${product.price}")
-                NectarButton(onClick = {}){
+                NectarButton(onClick = onAdd){
                     Icon(imageVector =  Icons.Default.Add, contentDescription = null)
                 }
             }
