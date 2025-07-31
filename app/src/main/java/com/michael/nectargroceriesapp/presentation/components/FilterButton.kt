@@ -8,9 +8,11 @@ import androidx.compose.ui.res.painterResource
 import com.michael.nectargroceriesapp.R
 
 @Composable
-fun FilterButton(){
+fun FilterButton(
+    onClick: () -> Unit
+){
     TextButton(
-        onClick = {}
+        onClick = onClick
     ) {
         Icon(
             painter = painterResource(R.drawable.filter),
