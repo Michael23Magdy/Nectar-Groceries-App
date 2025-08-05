@@ -43,6 +43,7 @@ import com.michael.nectargroceriesapp.presentation.screens.common.LoadingIndicat
 @Composable
 fun SearchScreen(
     navController: NavHostController,
+    modifier: Modifier = Modifier,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     val query = viewModel.query
@@ -52,7 +53,9 @@ fun SearchScreen(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var showBottomSheet by remember { mutableStateOf(false) }
 
-    Column {
+    Column(
+        modifier = modifier
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,

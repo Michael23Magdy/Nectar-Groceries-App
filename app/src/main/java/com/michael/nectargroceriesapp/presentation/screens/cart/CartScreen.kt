@@ -41,12 +41,13 @@ import com.michael.nectargroceriesapp.ui.navigation.Routes
 @Composable
 fun CartScreen(
     navHostController: NavHostController,
+    modifier: Modifier = Modifier,
     viewModel: CartViewModel = hiltViewModel()
 ){
     val cart = viewModel.cart.collectAsState()
     val totalPrice = viewModel.totalPrice.collectAsState()
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,

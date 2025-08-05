@@ -11,7 +11,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.michael.nectargroceriesapp.presentation.screens.OrderAcceptedScreen
 import com.michael.nectargroceriesapp.presentation.screens.cart.CartScreen
-import com.michael.nectargroceriesapp.presentation.screens.test.TestScreen
 import com.michael.nectargroceriesapp.presentation.screens.category.CategoryScreenRoot
 import com.michael.nectargroceriesapp.presentation.screens.category.CategoryViewModel
 import com.michael.nectargroceriesapp.presentation.screens.explore.ExploreScreen
@@ -20,49 +19,50 @@ import com.michael.nectargroceriesapp.presentation.screens.product_details.Produ
 import com.michael.nectargroceriesapp.presentation.screens.product_details.ProductDetailsViewModel
 import com.michael.nectargroceriesapp.presentation.screens.search.SearchScreen
 import com.michael.nectargroceriesapp.presentation.screens.search.SearchViewModel
+import com.michael.nectargroceriesapp.presentation.screens.welcome.WelcomeScreen
 
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
+    startDestination: String,
     navController: NavHostController = rememberNavController()
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.HomeScreen.route,
-        modifier = modifier
+        startDestination = startDestination,
     ){
         composable(Routes.WelcomeScreen.route) {
-            TestScreen("welcome")
+            WelcomeScreen(navController)
         }
         composable(Routes.HomeScreen.route) {
-            HomeScreen(navController)
+            HomeScreen(navController, modifier)
         }
         composable(
             Routes.ProductScreen.route,
             arguments = listOf(navArgument("productId") { type = NavType.IntType })
         ) {
             val viewModel: ProductDetailsViewModel = hiltViewModel()
-            ProductDetailsScreenRoot(navController, viewModel)
+            ProductDetailsScreenRoot(navController, modifier, viewModel)
         }
         composable(Routes.ExploreScreen.route) {
-            ExploreScreen(navController)
+            ExploreScreen(navController, modifier)
         }
         composable(
             Routes.CategoryScreen.route,
             arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
         ) {
             val viewModel: CategoryViewModel = hiltViewModel()
-            CategoryScreenRoot(navController, viewModel)
+            CategoryScreenRoot(navController, modifier, viewModel)
         }
         composable(
             Routes.SearchScreen.route,
             arguments = listOf(navArgument("query") { type = NavType.StringType })
         ) {
             val viewModel: SearchViewModel = hiltViewModel()
-            SearchScreen(navController, viewModel)
+            SearchScreen(navController, modifier, viewModel)
         }
         composable(Routes.CartScreen.route) {
-            CartScreen(navController)
+            CartScreen(navController, modifier)
         }
         composable(Routes.OrderAcceptedScreen.route) {
             OrderAcceptedScreen(navController)

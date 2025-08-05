@@ -40,7 +40,7 @@ fun OrderAcceptedScreen(
         )
 
         Column(
-            modifier = Modifier.fillMaxSize().padding(20.dp).align(Alignment.Center)
+            modifier = Modifier.fillMaxWidth().padding(20.dp).align(Alignment.Center)
         ) {
             Image(
                 painter = painterResource(R.drawable.accepted_order_image),
