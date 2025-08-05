@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -82,7 +81,7 @@ fun SearchScreen(
                 } else {
                     LazyTwoColVerticalGrid {
                         items(products){ item ->
-                            ProductCard(item, navController::navigate, modifier = Modifier.fillMaxWidth())
+                            ProductCard(item, navController::navigate, onAdd = viewModel::addToCart, modifier = Modifier.fillMaxWidth())
                         }
                     }
                 }
@@ -123,12 +122,13 @@ fun SearchScreen(
                         viewModel.updateFilterRule(rule, isChecked)
                     }
                 )
+
                 NectarButton(
                     onClick = {
                         viewModel.loadProducts()
                         showBottomSheet = false
                               },
-                    modifier = Modifier.fillMaxWidth().padding(20.dp)
+                    modifier = Modifier.fillMaxWidth().padding(20.dp),
                 ) {
                     Text(text = "Apply Filter")
                 }

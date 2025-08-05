@@ -145,7 +145,13 @@ fun ProductDetailsScreen(
         ReviewSection(product.review)
 
         Spacer(modifier = Modifier.weight(1f))
-        NectarButton(modifier = Modifier.fillMaxWidth().height(58.dp).padding(20.dp, 0.dp), onClick = {}) {
+        NectarButton(
+            onClick = {
+                viewModel.addToCart(product.id, numberOfWantedUnits)
+            }
+            ,
+            modifier = Modifier.fillMaxWidth().height(58.dp).padding(20.dp, 0.dp),
+        ) {
             Text(text = "Add to Basket", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(10.dp))
         }
     }

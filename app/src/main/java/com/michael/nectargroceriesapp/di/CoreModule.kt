@@ -23,7 +23,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class CoreModule {
-
     @Provides
     @Singleton
     fun provideDatabase(
@@ -33,7 +32,7 @@ class CoreModule {
             context,
             GroceriesDatabase::class.java,
             GroceriesDatabase.DATABASE_NAME
-        ).createFromAsset("database/groceries.db").build()
+        ).createFromAsset("database/Nectar.db").build()
     }
 
     @Provides

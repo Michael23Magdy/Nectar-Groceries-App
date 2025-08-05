@@ -55,9 +55,24 @@ fun HomeScreen(
                 .padding(horizontal = 20.dp)
         )
         //TODO: Panels
-        HomeScreenSection("Exclusive Offer", exclusiveOfferProducts.value, navController::navigate)
-        HomeScreenSection("Best Selling", bestSellingProducts.value, navController::navigate)
-        HomeScreenSection("Meat & Fish", meatAndFishProducts.value, navController::navigate)
+        HomeScreenSection(
+            name = "Exclusive Offer",
+            list = exclusiveOfferProducts.value,
+            safeNavigate = navController::navigate,
+            onAdd = viewModel::addToCart
+        )
+        HomeScreenSection(
+            name = "Best Selling",
+            list = bestSellingProducts.value,
+            safeNavigate = navController::navigate,
+            onAdd = viewModel::addToCart
+        )
+        HomeScreenSection(
+            name = "Meat & Fish",
+            list = meatAndFishProducts.value,
+            safeNavigate = navController::navigate,
+            onAdd = viewModel::addToCart
+        )
     }
 }
 
@@ -87,8 +102,9 @@ fun HomeScreenHeader(
 fun HomeScreenSection(
     name: String,
     list: List<Product>,
+    modifier: Modifier = Modifier,
     safeNavigate: (String) -> Unit = {},
-    modifier: Modifier = Modifier
+    onAdd: (Int, Int) -> Unit
 ){
     Column(
         modifier = modifier.padding(bottom = 6.dp, top = 6.dp)
@@ -108,7 +124,7 @@ fun HomeScreenSection(
         LazyRow {
             item{Spacer(modifier = Modifier.width(20.dp))}
             items(list) { item ->
-                ProductCard(product = item, onClick = safeNavigate)
+                ProductCard(product = item, onClick = safeNavigate, onAdd = onAdd)
                 Spacer(modifier = Modifier.width(15.dp))
             }
             item{Spacer(modifier = Modifier.width(5.dp))}

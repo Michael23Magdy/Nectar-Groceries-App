@@ -6,7 +6,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.michael.nectargroceriesapp.domain.model.Cart
 import com.michael.nectargroceriesapp.domain.usecase.CoreUseCases
+import com.michael.nectargroceriesapp.domain.usecase.cart.InsertCartItem
 import com.michael.nectargroceriesapp.domain.usecase.filter.FilterUseCases
 import com.michael.nectargroceriesapp.presentation.screens.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,8 @@ import javax.inject.Inject
 class CategoryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     coreUseCases: CoreUseCases,
-    filterUseCases: FilterUseCases
+    filterUseCases: FilterUseCases,
+    private val insertCartItem: InsertCartItem
 ): ViewModel() {
     val categoryId: String = checkNotNull(savedStateHandle["categoryId"])
     var categoryWithProductsUiState by mutableStateOf<UiState<CategoryWithProductsUiState>>(UiState.Loading)
@@ -39,6 +42,12 @@ class CategoryViewModel @Inject constructor(
             } catch (e: Exception){
                 categoryWithProductsUiState = UiState.Error(e.message ?: "Unknown error")
             }
+        }
+    }
+
+    fun addToCart(productId: Int, quantity: Int) {
+        viewModelScope.launch {
+            insertCartItem(Cart(productId = productId, count = quantity))
         }
     }
 }

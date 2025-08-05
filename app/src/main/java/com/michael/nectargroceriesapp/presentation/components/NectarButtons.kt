@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 fun NectarButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     content: @Composable () -> Unit
 ) {
     Button(
@@ -23,6 +24,7 @@ fun NectarButton(
         modifier = modifier
             .size(45.dp),
         shape = MaterialTheme.shapes.large,
+        enabled = enabled,
         contentPadding = PaddingValues(0.dp)
     ) {
         content()

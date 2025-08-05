@@ -13,12 +13,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,11 +36,13 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.michael.nectargroceriesapp.domain.model.Product
 import com.michael.nectargroceriesapp.ui.navigation.Routes
+import kotlinx.coroutines.delay
 
 @Composable
 fun ProductCard(
     product: Product,
     onClick: (String) -> Unit,
+    onAdd: (Int, Int) -> Unit,
     modifier: Modifier = Modifier,
     width: Dp = 150.dp
 ){
@@ -90,14 +98,40 @@ fun ProductCard(
                     .fillMaxWidth()
             ){
                 Text(text = "$${product.price}")
-                NectarButton(onClick = {}){
-                    Icon(imageVector =  Icons.Default.Add, contentDescription = null)
-                }
+                AddToCartButton(onClick = { onAdd(product.id, 1) })
             }
         }
     }
 
 }
+
+@Composable
+fun AddToCartButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    var showCheck by remember { mutableStateOf(false) }
+    LaunchedEffect(showCheck) {
+        if (showCheck) {
+            delay(2000)
+            showCheck = false
+        }
+    }
+    NectarButton(
+        modifier = modifier,
+        enabled = !showCheck,
+        onClick = {
+            onClick()
+            showCheck = true
+        }
+    ) {
+        Icon(
+            imageVector = if (showCheck) Icons.Default.Check else Icons.Default.Add,
+            contentDescription = null
+        )
+    }
+}
+
 
 
 @Preview(showBackground = true)
@@ -120,6 +154,7 @@ fun PreviewCard(){
             3
         ),
 
-        {}
+        {},
+        { u, t -> t + u}
     )
 }
