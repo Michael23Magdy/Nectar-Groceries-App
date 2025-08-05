@@ -12,7 +12,6 @@ class CartRepositoryImpl @Inject constructor(
     private val cartDao: CartDao
 ): CartRepository {
     override suspend fun insertCartItem(cart: Cart) {
-        Log.d("CartRepositoryImpl", "Inserting cart item: $cart")
         cartDao.insertCart(cart)
     }
 
