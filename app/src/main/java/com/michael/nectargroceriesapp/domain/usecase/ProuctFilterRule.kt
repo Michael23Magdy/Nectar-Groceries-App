@@ -20,6 +20,10 @@ sealed class ProductFilterRule {
     data class Or(val rules: List<ProductFilterRule>) : ProductFilterRule() {
         override fun matches(product: Product): Boolean = if(rules.isEmpty()) true else rules.any { it.matches(product) }
     }
+
+    object None: ProductFilterRule() {
+        override fun matches(product: Product): Boolean = true
+    }
 }
 
 fun applyFilterProducts(products: List<Product>, rule: ProductFilterRule): List<Product> {

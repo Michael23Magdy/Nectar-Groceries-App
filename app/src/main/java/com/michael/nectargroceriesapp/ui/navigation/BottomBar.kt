@@ -3,14 +3,9 @@ package com.michael.nectargroceriesapp.ui.navigation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
@@ -20,9 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -65,8 +60,8 @@ fun BottomNavigationBar(navController: NavHostController) {
                 NavigationBarItem(
                     selected = currentRoute(navController) == item.route,
                     onClick = { navController.safeNavigateSingleTopTo(item.route) },
-                    icon = { Icon(painter = painterResource(item.icon), contentDescription = item.label) },
-                    label = { Text(item.label) },
+                    icon = { Icon(painter = painterResource(item.icon), contentDescription = null) },
+                    label = { Text(stringResource(item.label)) },
                     colors = colors
                 )
             }
@@ -78,23 +73,23 @@ fun BottomNavigationBar(navController: NavHostController) {
 private data class BottomNavItem(
     val route: String,
     val icon: Int,
-    val label: String
+    val label: Int
 )
 private val bottomNavItems = listOf(
     BottomNavItem(
         route = Routes.HomeScreen.route,
         icon = R.drawable.shop,
-        label = "Shop"
+        label = R.string.shop
     ),
     BottomNavItem(
         route = Routes.ExploreScreen.route,
         icon = R.drawable.explore,
-        label = "Explore"
+        label = R.string.explore
     ),
     BottomNavItem(
         route = Routes.CartScreen.route,
         icon = R.drawable.cart,
-        label = "Cart"
+        label = R.string.cart
     )
 )
 

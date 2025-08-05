@@ -1,4 +1,4 @@
-package com.michael.nectargroceriesapp.domain.usecase
+package com.michael.nectargroceriesapp.domain.usecase.core
 
 import com.michael.nectargroceriesapp.data.local.ProductDao
 import com.michael.nectargroceriesapp.domain.model.Product

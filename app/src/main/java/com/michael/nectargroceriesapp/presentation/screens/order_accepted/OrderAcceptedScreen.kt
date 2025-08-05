@@ -1,4 +1,4 @@
-package com.michael.nectargroceriesapp.presentation.screens
+package com.michael.nectargroceriesapp.presentation.screens.order_accepted
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,6 +24,7 @@ import androidx.navigation.NavHostController
 import com.michael.nectargroceriesapp.ui.navigation.Routes
 import com.michael.nectargroceriesapp.R
 import com.michael.nectargroceriesapp.presentation.components.NectarButton
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @Composable
 fun OrderAcceptedScreen(
@@ -40,25 +42,29 @@ fun OrderAcceptedScreen(
         )
 
         Column(
-            modifier = Modifier.fillMaxWidth().padding(20.dp).align(Alignment.Center)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Dimen.paddingLarge)
+                .align(Alignment.Center)
         ) {
             Image(
                 painter = painterResource(R.drawable.accepted_order_image),
                 contentDescription = null,
-                modifier = Modifier.padding(20.dp).align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .padding(Dimen.paddingLarge)
+                    .align(Alignment.CenterHorizontally)
             )
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(Dimen.paddingLarge))
             Text(
-                text = "Your Order has been\n accepted",
+                text = stringResource(R.string.order_accepted),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.displayMedium,
                 fontSize = 34.sp,
                 textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(Dimen.paddingLarge))
             Text(
-                text = "Your items has been placed and is on \n" +
-                    "it’s way to being processed",
+                text = stringResource(R.string.order_accepted_subtitle),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodyMedium,
@@ -67,20 +73,29 @@ fun OrderAcceptedScreen(
         }
 
         Column (
-            modifier = Modifier.padding(20.dp).align(Alignment.BottomCenter),
+            modifier = Modifier
+                .padding(Dimen.paddingLarge)
+                .align(Alignment.BottomCenter),
 
         ){
             NectarButton(
                 onClick = {},
-                modifier = Modifier.fillMaxWidth().height(60.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
             ) {
-                Text(text = "Track Order")
+                Text(text = stringResource(R.string.track_order),
+                    style = MaterialTheme.typography.bodyLarge)
             }
             TextButton(
-                modifier = Modifier.fillMaxWidth().height(60.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
                 onClick = { navHostController.navigate(Routes.HomeScreen.route) }
             ) {
-                Text(text = "Back to Home")
+                Text(text = stringResource(R.string.back_to_home),
+                    style = MaterialTheme.typography.bodyLarge)
+
             }
         }
     }

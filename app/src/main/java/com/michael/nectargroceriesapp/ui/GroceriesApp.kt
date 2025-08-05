@@ -40,7 +40,7 @@ fun GroceriesApp(
             containerColor = MaterialTheme.colorScheme.background
         ) { innerPadding ->
             AppNavHost(
-                navController = navController,
+                navHostController = navController,
                 startDestination = startDestination,
                 modifier = Modifier.padding(innerPadding)
             )

@@ -1,4 +1,4 @@
-package com.michael.nectargroceriesapp.domain.usecase
+package com.michael.nectargroceriesapp.domain.usecase.core
 
 import com.michael.nectargroceriesapp.domain.repository.CategoryRepository
 import javax.inject.Inject

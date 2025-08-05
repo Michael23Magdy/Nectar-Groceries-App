@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.michael.nectargroceriesapp.domain.model.Product
 import com.michael.nectargroceriesapp.ui.navigation.Routes
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 import kotlinx.coroutines.delay
 
 @Composable
@@ -63,7 +64,7 @@ fun ProductCard(
             modifier = modifier
                 .width(width)
                 .aspectRatio(ratio = 0.75f)
-                .padding(10.dp),
+                .padding(Dimen.paddingMedium),
 
             ) {
             AsyncImage(

@@ -1,6 +1,5 @@
 package com.michael.nectargroceriesapp.data.repository
 
-import android.util.Log
 import com.michael.nectargroceriesapp.data.local.CartDao
 import com.michael.nectargroceriesapp.domain.model.Cart
 import com.michael.nectargroceriesapp.domain.model.CartWithProduct
@@ -12,7 +11,6 @@ class CartRepositoryImpl @Inject constructor(
     private val cartDao: CartDao
 ): CartRepository {
     override suspend fun insertCartItem(cart: Cart) {
-        Log.d("CartRepositoryImpl", "Inserting cart item: $cart")
         cartDao.insertCart(cart)
     }
 

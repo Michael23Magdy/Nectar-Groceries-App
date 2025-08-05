@@ -11,13 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.michael.nectargroceriesapp.R
 import com.michael.nectargroceriesapp.presentation.components.CategoryCard
 import com.michael.nectargroceriesapp.presentation.components.LazyTwoColVerticalGrid
 import com.michael.nectargroceriesapp.presentation.components.SearchBar
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @Composable
 fun ExploreScreen(
@@ -31,17 +34,16 @@ fun ExploreScreen(
         modifier = modifier.fillMaxSize()
     ) {
         Text(
-            text = "Find Products",
+            text = stringResource(R.string.find_products),
             style = MaterialTheme.typography.displaySmall,
-            modifier = Modifier.fillMaxWidth().padding(20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Dimen.paddingLarge),
             textAlign = TextAlign.Center
         )
-        SearchBar(navController, modifier = Modifier.padding(20.dp, 0.dp))
+        SearchBar(navController, modifier = Modifier.padding(Dimen.paddingLarge, 0.dp))
 
-        LazyTwoColVerticalGrid() {
-            items(categories.value) { category ->
-                CategoryCard(category = category, navController::navigate)
-            }
+        LazyTwoColVerticalGrid {
             items(categories.value) { category ->
                 CategoryCard(category = category, navController::navigate)
             }

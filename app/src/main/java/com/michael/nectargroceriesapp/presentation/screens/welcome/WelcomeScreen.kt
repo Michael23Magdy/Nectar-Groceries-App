@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,6 +29,7 @@ import androidx.navigation.NavHostController
 import com.michael.nectargroceriesapp.R
 import com.michael.nectargroceriesapp.presentation.components.NectarButton
 import com.michael.nectargroceriesapp.ui.navigation.Routes
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @Composable
 fun WelcomeScreen(
@@ -44,7 +46,8 @@ fun WelcomeScreen(
         )
         Column(
             modifier = Modifier
-                .fillMaxSize().padding(20.dp),
+                .fillMaxSize()
+                .padding(Dimen.paddingLarge),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -55,16 +58,16 @@ fun WelcomeScreen(
             )
 
             Text(
-                text = "Welcome\nto our store",
+                text = stringResource(R.string.welcome),
                 style = MaterialTheme.typography.displayMedium,
                 fontSize = 45.sp,
                 textAlign = TextAlign.Center,
                 lineHeight = 60.sp,
                 color = Color.White
             )
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(Dimen.paddingLarge))
             Text(
-                text = "Ger your groceries in as fast as one hour",
+                text = stringResource(R.string.slogan),
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Gray.copy(alpha = 0.7f),
             )
@@ -74,9 +77,11 @@ fun WelcomeScreen(
                     navHostController.popBackStack()
                     navHostController.navigate(Routes.HomeScreen.route)
                 },
-                modifier = Modifier.fillMaxWidth().height(68.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(68.dp)
             ) {
-                Text(text = "Get Started", style = MaterialTheme.typography.titleMedium)
+                Text(text = stringResource(R.string.get_started), style = MaterialTheme.typography.titleMedium)
             }
             Spacer(modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars))
         }
