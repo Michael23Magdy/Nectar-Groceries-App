@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michael.nectargroceriesapp.domain.model.Cart
 import com.michael.nectargroceriesapp.domain.model.Product
-import com.michael.nectargroceriesapp.domain.usecase.GetProduct
+import com.michael.nectargroceriesapp.domain.usecase.core.GetProduct
 import com.michael.nectargroceriesapp.domain.usecase.cart.InsertCartItem
 import com.michael.nectargroceriesapp.presentation.screens.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel

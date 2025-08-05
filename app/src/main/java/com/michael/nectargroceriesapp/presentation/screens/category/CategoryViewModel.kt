@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michael.nectargroceriesapp.domain.model.Cart
-import com.michael.nectargroceriesapp.domain.usecase.CoreUseCases
+import com.michael.nectargroceriesapp.domain.usecase.core.CoreUseCases
 import com.michael.nectargroceriesapp.domain.usecase.ProductFilterRule
 import com.michael.nectargroceriesapp.domain.usecase.applyFilterProducts
 import com.michael.nectargroceriesapp.domain.usecase.cart.InsertCartItem

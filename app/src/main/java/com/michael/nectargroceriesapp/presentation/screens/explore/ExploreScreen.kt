@@ -20,6 +20,7 @@ import com.michael.nectargroceriesapp.R
 import com.michael.nectargroceriesapp.presentation.components.CategoryCard
 import com.michael.nectargroceriesapp.presentation.components.LazyTwoColVerticalGrid
 import com.michael.nectargroceriesapp.presentation.components.SearchBar
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @Composable
 fun ExploreScreen(
@@ -37,15 +38,12 @@ fun ExploreScreen(
             style = MaterialTheme.typography.displaySmall,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(Dimen.paddingLarge),
             textAlign = TextAlign.Center
         )
-        SearchBar(navController, modifier = Modifier.padding(20.dp, 0.dp))
+        SearchBar(navController, modifier = Modifier.padding(Dimen.paddingLarge, 0.dp))
 
-        LazyTwoColVerticalGrid() {
-            items(categories.value) { category ->
-                CategoryCard(category = category, navController::navigate)
-            }
+        LazyTwoColVerticalGrid {
             items(categories.value) { category ->
                 CategoryCard(category = category, navController::navigate)
             }

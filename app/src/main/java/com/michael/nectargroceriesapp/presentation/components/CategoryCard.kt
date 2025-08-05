@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.michael.nectargroceriesapp.domain.model.Category
 import com.michael.nectargroceriesapp.ui.navigation.Routes
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 import com.michael.nectargroceriesapp.ui.theme.categoryCardColors
 
 @Composable
@@ -41,7 +42,7 @@ fun CategoryCard(
         onClick = { onClick(Routes.CategoryScreen.createRoute(category.name)) }
     ){
         Column(
-            modifier = Modifier.fillMaxSize().padding(10.dp),
+            modifier = Modifier.fillMaxSize().padding(Dimen.paddingMedium),
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

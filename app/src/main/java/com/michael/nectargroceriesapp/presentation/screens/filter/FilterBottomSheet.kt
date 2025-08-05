@@ -23,6 +23,7 @@ import com.michael.nectargroceriesapp.R
 import com.michael.nectargroceriesapp.domain.usecase.ProductFilterRule
 import com.michael.nectargroceriesapp.domain.usecase.displayName
 import com.michael.nectargroceriesapp.presentation.components.NectarButton
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,7 +74,7 @@ fun FilterBottomSheet(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp),
+                    .padding(Dimen.paddingLarge),
             ) {
                 Text(text = stringResource(R.string.apply_filter))
             }

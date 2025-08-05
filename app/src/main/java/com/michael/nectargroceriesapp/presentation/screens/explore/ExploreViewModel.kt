@@ -2,7 +2,7 @@ package com.michael.nectargroceriesapp.presentation.screens.explore
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.michael.nectargroceriesapp.domain.usecase.GetCategories
+import com.michael.nectargroceriesapp.domain.usecase.core.GetCategories
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn

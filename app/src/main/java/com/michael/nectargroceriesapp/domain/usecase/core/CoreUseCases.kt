@@ -1,4 +1,4 @@
-package com.michael.nectargroceriesapp.domain.usecase
+package com.michael.nectargroceriesapp.domain.usecase.core
 
 import javax.inject.Inject
 

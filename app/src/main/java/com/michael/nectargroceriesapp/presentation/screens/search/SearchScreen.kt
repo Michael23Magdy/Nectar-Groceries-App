@@ -28,6 +28,7 @@ import com.michael.nectargroceriesapp.presentation.screens.UiState
 import com.michael.nectargroceriesapp.presentation.screens.common.ErrorMessage
 import com.michael.nectargroceriesapp.presentation.screens.common.LoadingIndicator
 import com.michael.nectargroceriesapp.presentation.screens.filter.FilterBottomSheet
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +49,7 @@ fun SearchScreen(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier.padding(20.dp, 0.dp)
+            modifier = Modifier.padding(Dimen.paddingLarge, 0.dp)
         ) {
             SearchBar(query.value, viewModel::onQueryChange, modifier = Modifier.weight(1f))
             FilterButton(onClick = { showBottomSheet = true })

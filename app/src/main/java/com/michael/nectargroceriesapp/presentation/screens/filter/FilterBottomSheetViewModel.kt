@@ -3,7 +3,7 @@ package com.michael.nectargroceriesapp.presentation.screens.filter
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.michael.nectargroceriesapp.domain.usecase.GetCategories
+import com.michael.nectargroceriesapp.domain.usecase.core.GetCategories
 import com.michael.nectargroceriesapp.domain.usecase.ProductFilterRule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest

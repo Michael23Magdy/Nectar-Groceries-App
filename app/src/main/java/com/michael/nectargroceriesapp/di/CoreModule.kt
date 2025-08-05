@@ -9,10 +9,10 @@ import com.michael.nectargroceriesapp.data.repository.CategoryRepositoryImpl
 import com.michael.nectargroceriesapp.data.repository.ProductRepositoryImpl
 import com.michael.nectargroceriesapp.domain.repository.CategoryRepository
 import com.michael.nectargroceriesapp.domain.repository.ProductRepository
-import com.michael.nectargroceriesapp.domain.usecase.CoreUseCases
-import com.michael.nectargroceriesapp.domain.usecase.GetCategories
-import com.michael.nectargroceriesapp.domain.usecase.GetCategory
-import com.michael.nectargroceriesapp.domain.usecase.GetProduct
+import com.michael.nectargroceriesapp.domain.usecase.core.CoreUseCases
+import com.michael.nectargroceriesapp.domain.usecase.core.GetCategories
+import com.michael.nectargroceriesapp.domain.usecase.core.GetCategory
+import com.michael.nectargroceriesapp.domain.usecase.core.GetProduct
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

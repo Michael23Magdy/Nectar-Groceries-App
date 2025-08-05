@@ -42,8 +42,8 @@ fun SearchBar(
 fun SearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
-    onNavigate: () -> Unit = {},
     modifier: Modifier = Modifier,
+    onNavigate: () -> Unit = {},
     placeholder: String = stringResource(R.string.search_placeholder)
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current

@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @Composable
 fun LazyTwoColVerticalGrid(
@@ -19,7 +20,7 @@ fun LazyTwoColVerticalGrid(
         columns = GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(15.dp),
         verticalArrangement = Arrangement.spacedBy(15.dp),
-        modifier = modifier.fillMaxWidth().padding(20.dp, 20.dp, 20.dp, 0.dp),
+        modifier = modifier.fillMaxWidth().padding(Dimen.paddingLarge, Dimen.paddingLarge, Dimen.paddingLarge, 0.dp),
     ) {
         content()
     }

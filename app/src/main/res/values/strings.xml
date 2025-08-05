@@ -10,4 +10,21 @@
     <string name="prices">Prices</string>
     <string name="review">Review</string>
     <string name="no_products_found">No products found</string>
+    <string name="exclusive_offer">Exclusive Offer</string>
+    <string name="best_selling">Best Selling</string>
+    <string name="meat_fish"><![CDATA[Meat & Fish]]></string>
+    <string name="order_accepted">Your Order has been\n accepted</string>
+    <string name="order_accepted_subtitle">Your items has been placed and is on \nit’s way to being processed</string>
+    <string name="track_order">Track Order</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="add_to_basket">Add to Basket</string>
+    <string name="product_detail">Product Detail</string>
+    <string name="nutritions">Nutritions</string>
+    <string name="welcome">Welcome\nto our store</string>
+    <string name="slogan">Ger your groceries in as fast as one hour</string>
+    <string name="get_started">Get Started</string>
+    <string name="shop">Shop</string>
+    <string name="explore">Explore</string>
+    <string name="cart">Cart</string>
+    <string name="nectar_logo">Nectar Logo</string>
 </resources>

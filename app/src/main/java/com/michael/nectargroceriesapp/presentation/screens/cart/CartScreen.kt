@@ -43,6 +43,7 @@ import com.michael.nectargroceriesapp.presentation.screens.common.ErrorMessage
 import com.michael.nectargroceriesapp.presentation.screens.common.LoadingIndicator
 import com.michael.nectargroceriesapp.presentation.screens.product_details.components.NumberSelector
 import com.michael.nectargroceriesapp.ui.navigation.Routes
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @Composable
 fun CartScreen(
@@ -61,7 +62,7 @@ fun CartScreen(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp)
+                .padding(Dimen.paddingLarge)
         ) {
             Text(text = stringResource(R.string.my_cart), style = MaterialTheme.typography.titleLarge)
         }
@@ -92,7 +93,7 @@ fun CartScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(100.dp)
-                .padding(20.dp),
+                .padding(Dimen.paddingLarge),
             enabled = cartState is UiState.Success<List<CartWithProduct>> && cartState.data.isNotEmpty(),
             onClick = {
                 navHostController.navigate(Routes.OrderAcceptedScreen.route)
@@ -109,7 +110,7 @@ fun CartScreen(
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .padding(20.dp))
+                        .padding(Dimen.paddingLarge))
                 Text(
                     text = "$%.2f".format(totalPrice.value),
                     style = MaterialTheme.typography.bodyMedium,
@@ -133,7 +134,7 @@ fun CartItem(
     Row (
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.padding(20.dp)
+        modifier = modifier.padding(Dimen.paddingLarge)
     ){
         AsyncImage(
             model = cartWithProduct.product.imageUrl,
@@ -176,7 +177,7 @@ fun CartItem(
             Row (
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp),
+                    .padding(Dimen.paddingLarge),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){

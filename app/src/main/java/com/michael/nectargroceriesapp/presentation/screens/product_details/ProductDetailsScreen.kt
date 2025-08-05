@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -44,6 +45,7 @@ import com.michael.nectargroceriesapp.presentation.screens.product_details.compo
 import com.michael.nectargroceriesapp.ui.navigation.BackButton
 import com.michael.nectargroceriesapp.ui.navigation.Routes
 import com.michael.nectargroceriesapp.ui.navigation.safeNavigateSingleTopTo
+import com.michael.nectargroceriesapp.ui.theme.Dimen
 
 @Composable
 fun ProductDetailsScreenRoot(
@@ -69,7 +71,9 @@ fun ProductDetailsScreen(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState())
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
         Surface (
             modifier = Modifier.fillMaxWidth(),
@@ -83,7 +87,9 @@ fun ProductDetailsScreen(
                 contentScale = ContentScale.Fit
             )
             Row(
-                modifier = Modifier.fillMaxWidth().padding(5.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -104,7 +110,9 @@ fun ProductDetailsScreen(
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth().padding(20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Dimen.paddingLarge),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -113,7 +121,7 @@ fun ProductDetailsScreen(
                     text = product.name,
                     style = MaterialTheme.typography.displaySmall
                 )
-                Spacer(modifier = Modifier.size(10.dp))
+                Spacer(modifier = Modifier.size(Dimen.paddingMedium))
                 Text(
                     text = product.detail,
                     style = MaterialTheme.typography.bodyMedium,
@@ -127,7 +135,9 @@ fun ProductDetailsScreen(
         }
 
         Row (
-            modifier = Modifier.fillMaxWidth().padding(20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Dimen.paddingLarge),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ){
@@ -154,9 +164,12 @@ fun ProductDetailsScreen(
                 viewModel.addToCart(product.id, numberOfWantedUnits)
                 navController.safeNavigateSingleTopTo(Routes.CartScreen.route)
             },
-            modifier = Modifier.fillMaxWidth().height(58.dp).padding(20.dp, 0.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(58.dp)
+                .padding(Dimen.paddingLarge, 0.dp),
         ) {
-            Text(text = "Add to Basket", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(10.dp))
+            Text(text = stringResource(R.string.add_to_basket), style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(Dimen.paddingMedium))
         }
     }
 }
@@ -164,8 +177,10 @@ fun ProductDetailsScreen(
 @Composable
 fun ProductDescriptionSection(description: String) {
     Expandable(
-        header = "Product Detail",
-        modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 20.dp)
+        header = stringResource(R.string.product_detail),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = Dimen.paddingMedium, horizontal = Dimen.paddingLarge)
     ) {
         Text(
             text = description,
@@ -178,12 +193,12 @@ fun ReviewSection(review: Int) {
     Expandable(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(20.dp,  10.dp),
-        header = "Review",
+            .padding(Dimen.paddingLarge, Dimen.paddingMedium),
+        header = stringResource(R.string.review),
         hint = {
             StarRating(
                 rating = review,
-                iconSize = 20.dp
+                iconSize = Dimen.paddingLarge
             )
         }
     ) {
@@ -201,8 +216,8 @@ fun NutritionSection(nutritions: Map<String, String>){
     Expandable(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(20.dp, 10.dp),
-        header = "Nutritions",
+            .padding(Dimen.paddingLarge, Dimen.paddingMedium),
+        header = stringResource(R.string.nutritions),
         hint = {
             Text(
                 text = nutritions["carbs"] ?: "",
