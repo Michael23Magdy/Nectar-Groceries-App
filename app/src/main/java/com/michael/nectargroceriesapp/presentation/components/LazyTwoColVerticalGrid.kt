@@ -19,7 +19,7 @@ fun LazyTwoColVerticalGrid(
         columns = GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(15.dp),
         verticalArrangement = Arrangement.spacedBy(15.dp),
-        modifier = modifier.fillMaxWidth().padding(20.dp),
+        modifier = modifier.fillMaxWidth().padding(20.dp, 20.dp, 20.dp, 0.dp),
     ) {
         content()
     }

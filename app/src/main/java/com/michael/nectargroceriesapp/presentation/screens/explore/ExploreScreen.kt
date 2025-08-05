@@ -1,6 +1,7 @@
 package com.michael.nectargroceriesapp.presentation.screens.explore
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.items
@@ -21,11 +22,13 @@ import com.michael.nectargroceriesapp.presentation.components.SearchBar
 @Composable
 fun ExploreScreen(
     navController: NavHostController,
+    modifier: Modifier = Modifier,
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val categories = viewModel.categories.collectAsState()
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.fillMaxSize()
     ) {
         Text(
             text = "Find Products",
@@ -35,7 +38,7 @@ fun ExploreScreen(
         )
         SearchBar(navController, modifier = Modifier.padding(20.dp, 0.dp))
 
-        LazyTwoColVerticalGrid {
+        LazyTwoColVerticalGrid() {
             items(categories.value) { category ->
                 CategoryCard(category = category, navController::navigate)
             }

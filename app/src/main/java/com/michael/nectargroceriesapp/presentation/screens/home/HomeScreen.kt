@@ -35,13 +35,14 @@ import com.michael.nectargroceriesapp.presentation.components.ProductCard
 @Composable
 fun HomeScreen(
     navController: NavHostController,
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val exclusiveOfferProducts = viewModel.exclusiveOfferProductList.collectAsState()
     val bestSellingProducts = viewModel.bestSellingProductList.collectAsState()
     val meatAndFishProducts = viewModel.meatAndFishProductsList.collectAsState()
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,

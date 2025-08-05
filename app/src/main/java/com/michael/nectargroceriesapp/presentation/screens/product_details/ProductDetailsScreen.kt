@@ -46,26 +46,28 @@ import com.michael.nectargroceriesapp.ui.navigation.BackButton
 @Composable
 fun ProductDetailsScreenRoot(
     navController: NavHostController,
+    modifier: Modifier = Modifier,
     viewModel: ProductDetailsViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState
     when (uiState) {
         is UiState.Loading -> LoadingIndicator()
         is UiState.Error -> ErrorMessage(uiState.message)
-        is UiState.Success<Product> -> ProductDetailsScreen(navController, uiState.data, viewModel)
+        is UiState.Success<Product> -> ProductDetailsScreen(navController, uiState.data, modifier, viewModel)
     }
 }
 @Composable
 fun ProductDetailsScreen(
     navController: NavHostController,
     product: Product,
+    modifier: Modifier = Modifier,
     viewModel: ProductDetailsViewModel = hiltViewModel()
 ){
     val numberOfWantedUnits = viewModel.numberOfWantedUnits
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+        modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState())
     ) {
         Surface (
             modifier = Modifier.fillMaxWidth(),
