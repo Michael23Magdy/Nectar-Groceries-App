@@ -27,14 +27,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.michael.nectargroceriesapp.R
 import com.michael.nectargroceriesapp.domain.model.CartWithProduct
+import com.michael.nectargroceriesapp.presentation.components.EmptyList
 import com.michael.nectargroceriesapp.presentation.components.NectarButton
 import com.michael.nectargroceriesapp.presentation.components.NectarDivider
+import com.michael.nectargroceriesapp.presentation.screens.UiState
+import com.michael.nectargroceriesapp.presentation.screens.common.ErrorMessage
+import com.michael.nectargroceriesapp.presentation.screens.common.LoadingIndicator
 import com.michael.nectargroceriesapp.presentation.screens.product_details.components.NumberSelector
 import com.michael.nectargroceriesapp.ui.navigation.Routes
 
@@ -44,43 +50,62 @@ fun CartScreen(
     modifier: Modifier = Modifier,
     viewModel: CartViewModel = hiltViewModel()
 ){
-    val cart = viewModel.cart.collectAsState()
     val totalPrice = viewModel.totalPrice.collectAsState()
+    val cartState = viewModel.state
+
     Column(
         modifier = modifier.fillMaxSize()
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().padding(20.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
         ) {
-            Text(text = "My Cart", style = MaterialTheme.typography.titleLarge)
+            Text(text = stringResource(R.string.my_cart), style = MaterialTheme.typography.titleLarge)
         }
         HorizontalDivider()
-        LazyColumn (
-            modifier = Modifier.weight(1f)
-        ) {
-            items(cart.value) { item ->
-                CartItem(
-                    cartWithProduct = item,
-                    viewModel = viewModel
-                )
-                NectarDivider()
+        when(cartState){
+            is UiState.Loading -> LoadingIndicator()
+            is UiState.Error -> ErrorMessage(cartState.message)
+            is UiState.Success<List<CartWithProduct>> -> {
+                if(cartState.data.isEmpty()){
+                    EmptyList(stringResource(R.string.your_cart_is_empty))
+                } else {
+                    LazyColumn (
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        items(cartState.data) { item ->
+                            CartItem(
+                                cartWithProduct = item,
+                                viewModel = viewModel
+                            )
+                            NectarDivider()
+                        }
+                    }
+                }
             }
         }
+
         NectarButton(
-            modifier = Modifier.fillMaxWidth().height(100.dp).padding(20.dp),
-            enabled = cart.value.isNotEmpty(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp),
+            enabled = cartState is UiState.Success<List<CartWithProduct>> && cartState.data.isNotEmpty(),
             onClick = {
                 navHostController.navigate(Routes.OrderAcceptedScreen.route)
                 viewModel.deleteWholeCart()
             }
         ) {
             Box (
-                modifier = Modifier.fillMaxSize().padding(15.dp, 0.dp)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(15.dp, 0.dp)
             ) {
                 Text(
-                    text = "Go to Checkout",
+                    text = stringResource(R.string.go_to_checkout),
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -113,7 +138,9 @@ fun CartItem(
         AsyncImage(
             model = cartWithProduct.product.imageUrl,
             contentDescription = cartWithProduct.product.name,
-            modifier = Modifier.height(120.dp).width(90.dp),
+            modifier = Modifier
+                .height(120.dp)
+                .width(90.dp),
             contentScale = ContentScale.Inside
         )
         Spacer(
@@ -147,7 +174,9 @@ fun CartItem(
             }
             Spacer(modifier = Modifier.height(5.dp))
             Row (
-                modifier = Modifier.fillMaxWidth().padding(20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ){

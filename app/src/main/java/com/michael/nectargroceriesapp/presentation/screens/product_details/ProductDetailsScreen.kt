@@ -153,7 +153,7 @@ fun ProductDetailsScreen(
         NectarButton(
             onClick = {
                 viewModel.addToCart(product.id, numberOfWantedUnits)
-                navController.navigate(Routes.CartScreen.route)
+                navController.safeNavigateSingleTopTo(Routes.CartScreen.route)
             },
             modifier = Modifier.fillMaxWidth().height(58.dp).padding(20.dp, 0.dp),
         ) {

@@ -30,6 +30,7 @@ import androidx.navigation.NavHostController
 import com.michael.nectargroceriesapp.domain.model.Product
 import com.michael.nectargroceriesapp.domain.usecase.ProductFilterRule
 import com.michael.nectargroceriesapp.domain.usecase.displayName
+import com.michael.nectargroceriesapp.presentation.components.EmptyList
 import com.michael.nectargroceriesapp.presentation.components.FilterButton
 import com.michael.nectargroceriesapp.presentation.components.LazyTwoColVerticalGrid
 import com.michael.nectargroceriesapp.presentation.components.NectarButton
@@ -71,16 +72,7 @@ fun SearchScreen(
                 val products = state.data
 
                 if (products.isEmpty()){
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "No Search Results",
-                            color = Color.Gray
-                        )
-                    }
+                    EmptyList("No Search results")
                 } else {
                     LazyTwoColVerticalGrid {
                         items(products){ item ->
