@@ -1,4 +1,4 @@
-package com.michael.nectargroceriesapp.presentation.components
+package com.michael.nectargroceriesapp.presentation.screens.filter
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme

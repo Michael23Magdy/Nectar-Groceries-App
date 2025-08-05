@@ -3,4 +3,11 @@
     <string name="my_cart">My Cart</string>
     <string name="go_to_checkout">Go to Checkout</string>
     <string name="your_cart_is_empty">Your cart is empty</string>
+    <string name="find_products">Find Products</string>
+    <string name="search_placeholder">Search Store</string>
+    <string name="apply_filter">Apply Filter</string>
+    <string name="categories">Categories</string>
+    <string name="prices">Prices</string>
+    <string name="review">Review</string>
+    <string name="no_products_found">No products found</string>
 </resources>

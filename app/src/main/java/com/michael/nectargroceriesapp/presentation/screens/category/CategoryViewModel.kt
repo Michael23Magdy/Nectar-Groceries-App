@@ -8,33 +8,43 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michael.nectargroceriesapp.domain.model.Cart
 import com.michael.nectargroceriesapp.domain.usecase.CoreUseCases
+import com.michael.nectargroceriesapp.domain.usecase.ProductFilterRule
+import com.michael.nectargroceriesapp.domain.usecase.applyFilterProducts
 import com.michael.nectargroceriesapp.domain.usecase.cart.InsertCartItem
 import com.michael.nectargroceriesapp.domain.usecase.filter.FilterUseCases
 import com.michael.nectargroceriesapp.presentation.screens.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CategoryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    coreUseCases: CoreUseCases,
-    filterUseCases: FilterUseCases,
+    private val coreUseCases: CoreUseCases,
+    private val filterUseCases: FilterUseCases,
     private val insertCartItem: InsertCartItem
 ): ViewModel() {
     val categoryId: String = checkNotNull(savedStateHandle["categoryId"])
     var categoryWithProductsUiState by mutableStateOf<UiState<CategoryWithProductsUiState>>(UiState.Loading)
         private set
-    init {
-        viewModelScope.launch {
 
+    var filterRule by mutableStateOf<ProductFilterRule>(ProductFilterRule.None)
+        private set
+
+    init {
+        loadProducts()
+    }
+
+    fun loadProducts() {
+        viewModelScope.launch {
             try {
-                coreUseCases.getCategory(categoryId).collect { category ->
+                coreUseCases.getCategory(categoryId).collectLatest { category ->
                     filterUseCases.filterProductsByCategory(categoryId).collect { products ->
                         categoryWithProductsUiState = UiState.Success(
                             CategoryWithProductsUiState(
                                 category = category,
-                                products = products
+                                products = applyFilterProducts(products, filterRule)
                             )
                         )
                     }
@@ -49,5 +59,10 @@ class CategoryViewModel @Inject constructor(
         viewModelScope.launch {
             insertCartItem(Cart(productId = productId, count = quantity))
         }
+    }
+
+    fun updateFilterRule(newFilterRule: ProductFilterRule) {
+        filterRule = newFilterRule
+        loadProducts()
     }
 }
