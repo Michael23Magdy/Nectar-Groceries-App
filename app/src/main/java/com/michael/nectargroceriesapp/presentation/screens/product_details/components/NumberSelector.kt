@@ -19,21 +19,38 @@ import com.michael.nectargroceriesapp.presentation.components.TextNectarButton
 fun NumberSelector(
     number: Int,
     onIncrease: () -> Unit,
-    onDecrease: () -> Unit
+    onDecrease: () -> Unit,
+    modifier: Modifier = Modifier,
+    invertBoarder: Boolean = false
 ) {
     Row(
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        TextNectarButton(onClick = onDecrease){
-            Icon(painter = painterResource(R.drawable.minus), contentDescription = null, tint = Color(0xFFB3B3B3))
+        if(invertBoarder) {
+            OutlinedNectarButton(onClick = onDecrease, modifier = modifier){
+                Icon(painter = painterResource(R.drawable.minus), contentDescription = null, tint = Color(0xFFB3B3B3))
+            }
+            Spacer(modifier = Modifier.width(5.dp))
+            TextNectarButton(onClick = onIncrease, modifier = modifier) {
+                Text(text = number.toString())
+            }
+            Spacer(modifier = Modifier.width(5.dp))
+            OutlinedNectarButton(onClick = onIncrease, modifier = modifier) {
+                Icon(painter = painterResource(R.drawable.add), contentDescription = null)
+            }
+        } else {
+            TextNectarButton(onClick = onDecrease, modifier = modifier){
+                Icon(painter = painterResource(R.drawable.minus), contentDescription = null, tint = Color(0xFFB3B3B3))
+            }
+            Spacer(modifier = Modifier.width(5.dp))
+            OutlinedNectarButton(onClick = onIncrease, modifier = modifier) {
+                Text(text = number.toString())
+            }
+            Spacer(modifier = Modifier.width(5.dp))
+            TextNectarButton(onClick = onIncrease, modifier = modifier) {
+                Icon(painter = painterResource(R.drawable.add), contentDescription = null)
+            }
         }
-        Spacer(modifier = Modifier.width(5.dp))
-        OutlinedNectarButton(onClick = onIncrease) {
-            Text(text = number.toString())
-        }
-        Spacer(modifier = Modifier.width(5.dp))
-        TextNectarButton(onClick = onIncrease) {
-            Icon(painter = painterResource(R.drawable.add), contentDescription = null)
-        }
+
     }
 }

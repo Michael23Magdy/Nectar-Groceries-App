@@ -8,6 +8,7 @@ import com.michael.nectargroceriesapp.domain.usecase.cart.CartUseCases
 import com.michael.nectargroceriesapp.domain.usecase.cart.DeleteCartItem
 import com.michael.nectargroceriesapp.domain.usecase.cart.DeleteWholeCart
 import com.michael.nectargroceriesapp.domain.usecase.cart.GetCart
+import com.michael.nectargroceriesapp.domain.usecase.cart.GetTotalPrice
 import com.michael.nectargroceriesapp.domain.usecase.cart.InsertCartItem
 import dagger.Module
 import dagger.Provides
@@ -56,16 +57,23 @@ class CartModule {
 
     @Provides
     @Singleton
+    fun provideGetTotalPrice(cartRepository: CartRepository): GetTotalPrice {
+        return GetTotalPrice(cartRepository)
+    }
+    @Provides
+    @Singleton
     fun provideCartUseCases(
         getCart: GetCart,
         deleteCartItem: DeleteCartItem,
         deleteWholeCart: DeleteWholeCart,
-        insertCartItem: InsertCartItem
+        insertCartItem: InsertCartItem,
+        getTotalPrice: GetTotalPrice
     ): CartUseCases = CartUseCases(
         getCart = getCart,
         deleteCartItem = deleteCartItem,
         deleteWholeCart = deleteWholeCart,
-        insertCartItem = insertCartItem
+        insertCartItem = insertCartItem,
+        getTotalPrice = getTotalPrice
     )
 
 }

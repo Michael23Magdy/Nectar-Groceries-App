@@ -7,10 +7,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.michael.nectargroceriesapp.domain.model.Cart
 import com.michael.nectargroceriesapp.domain.model.Product
 import com.michael.nectargroceriesapp.domain.usecase.GetCategories
 import com.michael.nectargroceriesapp.domain.usecase.ProductFilterRule
 import com.michael.nectargroceriesapp.domain.usecase.applyFilterProducts
+import com.michael.nectargroceriesapp.domain.usecase.cart.InsertCartItem
 import com.michael.nectargroceriesapp.domain.usecase.filter.FilterUseCases
 import com.michael.nectargroceriesapp.presentation.screens.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,6 +25,7 @@ class SearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val filterUseCases: FilterUseCases,
     private val getCategories: GetCategories,
+    private val insertCartItem: InsertCartItem
 ): ViewModel() {
     private val initialQuery: String = checkNotNull(savedStateHandle["query"])
     var query = mutableStateOf(initialQuery)
@@ -51,6 +54,12 @@ class SearchViewModel @Inject constructor(
             } catch (e: Exception) {
                 state = UiState.Error("Something went wrong: ${e.message}")
             }
+        }
+    }
+
+    fun addToCart(productId: Int, quantity: Int) {
+        viewModelScope.launch {
+            insertCartItem(Cart(productId = productId, count = quantity))
         }
     }
     fun loadFilterRules() {

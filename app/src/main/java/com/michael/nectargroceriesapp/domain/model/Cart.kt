@@ -15,9 +15,12 @@ import androidx.room.PrimaryKey
     )]
 )
 data class Cart(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "cartId")
+    val id: Int = 0,
+
     @ColumnInfo(name = "productId")
-    val productId: String,
+    val productId: Int,
 
     @ColumnInfo(name = "count")
     val count: Int

@@ -17,6 +17,12 @@ interface CartDao {
     @Query("SELECT * FROM cart")
     fun getCartWithProducts(): Flow<List<CartWithProduct>>
 
+    @Query("SELECT * FROM cart")
+    fun getCart(): Flow<List<Cart>>
+
+    @Query("SELECT * FROM cart WHERE productId = :productId")
+    suspend fun getCart(productId: Int): Cart?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCart(cart: Cart)
 
@@ -25,5 +31,12 @@ interface CartDao {
 
     @Query("DELETE FROM cart")
     suspend fun deleteWholeCart()
+
+
+    @Query("""
+        SELECT SUM(price * count) 
+        FROM cart
+        LEFT JOIN products ON cart.productId = products.id""")
+    fun getTotalPrice(): Flow<Double>
 }
 

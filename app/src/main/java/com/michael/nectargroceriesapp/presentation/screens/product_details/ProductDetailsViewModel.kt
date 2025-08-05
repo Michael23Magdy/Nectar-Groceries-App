@@ -7,8 +7,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.michael.nectargroceriesapp.domain.model.Cart
 import com.michael.nectargroceriesapp.domain.model.Product
 import com.michael.nectargroceriesapp.domain.usecase.GetProduct
+import com.michael.nectargroceriesapp.domain.usecase.cart.InsertCartItem
 import com.michael.nectargroceriesapp.presentation.screens.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -18,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getProduct: GetProduct
+    private val getProduct: GetProduct,
+    private val insertCartItem: InsertCartItem
 ): ViewModel() {
     val productId: Int = checkNotNull(savedStateHandle["productId"])
     var uiState by mutableStateOf<UiState<Product>>(UiState.Loading)
@@ -49,6 +52,12 @@ class ProductDetailsViewModel @Inject constructor(
     fun decreaseNumberOfWantedUnits() {
         if(numberOfWantedUnits > 1) {
             numberOfWantedUnits -= 1
+        }
+    }
+
+    fun addToCart(productId: Int, quantity: Int) {
+        viewModelScope.launch {
+            insertCartItem(Cart(productId = productId, count = quantity))
         }
     }
 }

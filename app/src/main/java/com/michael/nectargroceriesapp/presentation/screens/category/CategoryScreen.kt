@@ -60,7 +60,7 @@ fun CategoryScreen(
         }
         LazyTwoColVerticalGrid {
             items(products) { item ->
-                ProductCard(item, navController::navigate, modifier = Modifier.fillMaxWidth())
+                ProductCard(item, navController::navigate, onAdd = viewModel::addToCart, modifier = Modifier.fillMaxWidth())
             }
         }
     }

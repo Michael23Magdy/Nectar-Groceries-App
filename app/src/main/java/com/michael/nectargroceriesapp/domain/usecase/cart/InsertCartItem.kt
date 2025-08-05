@@ -8,6 +8,11 @@ class InsertCartItem @Inject constructor(
     private val cartRepository: CartRepository
 ) {
     suspend operator fun invoke(cart: Cart) {
-        cartRepository.insertCartItem(cart)
+        val existingCartItem = cartRepository.getCartItems(cart.productId)
+        var newCart = cart
+        if (existingCartItem != null) {
+            newCart = cart.copy(count = cart.count + existingCartItem.count, id = existingCartItem.id)
+        }
+        cartRepository.insertCartItem(newCart)
     }
 }

@@ -9,4 +9,8 @@ interface CartRepository {
     suspend fun deleteCartItem(cart: Cart)
     suspend fun deleteWholeCart()
     fun getCartItems(): Flow<List<CartWithProduct>>
+    suspend fun getCartItems(productId: Int): Cart?
+
+    fun getTotalPrice(): Flow<Double>
+
 }

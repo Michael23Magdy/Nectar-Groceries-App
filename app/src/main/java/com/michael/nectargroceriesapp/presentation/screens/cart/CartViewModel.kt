@@ -20,16 +20,22 @@ class CartViewModel @Inject constructor(
         initialValue = emptyList()
     )
 
+    val totalPrice = cartUseCases.getTotalPrice().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = 0.0
+    )
+
     fun increaseNumberOfWantedUnits(cart: Cart) {
         viewModelScope.launch {
-            cartUseCases.insertCartItem(cart.copy(count = cart.count + 1))
+            cartUseCases.insertCartItem(cart.copy(count = +1))
         }
     }
 
     fun decreaseNumberOfWantedUnits(cart: Cart) {
         viewModelScope.launch {
             if(cart.count > 1){
-                cartUseCases.insertCartItem(cart.copy(count = cart.count - 1))
+                cartUseCases.insertCartItem(cart.copy(count = -1))
             }
         }
     }
@@ -37,6 +43,12 @@ class CartViewModel @Inject constructor(
     fun onDelete(cart: Cart) {
         viewModelScope.launch {
             cartUseCases.deleteCartItem(cart)
+        }
+    }
+
+    fun deleteWholeCart() {
+        viewModelScope.launch {
+            cartUseCases.deleteWholeCart()
         }
     }
 }
