@@ -24,7 +24,7 @@ import com.michael.nectargroceriesapp.ui.navigation.BackButton
 
 @Composable
 fun CategoryScreenRoot(
-    navController: NavHostController,
+    navHostController: NavHostController,
     modifier: Modifier = Modifier,
     viewModel: CategoryViewModel = hiltViewModel()
 ){
@@ -32,9 +32,8 @@ fun CategoryScreenRoot(
     when(uiState){
         is UiState.Loading -> LoadingIndicator()
         is UiState.Error -> ErrorMessage(uiState.message)
-        is UiState.Success<CategoryWithProductsUiState> -> CategoryScreen(navController, uiState.data, modifier, viewModel)
+        is UiState.Success<CategoryWithProductsUiState> -> CategoryScreen(navHostController, uiState.data, modifier, viewModel)
     }
-
 }
 
 @Composable

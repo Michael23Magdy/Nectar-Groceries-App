@@ -33,9 +33,9 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.michael.nectargroceriesapp.R
 import com.michael.nectargroceriesapp.domain.model.Product
-import com.michael.nectargroceriesapp.presentation.screens.UiState
 import com.michael.nectargroceriesapp.presentation.components.NectarButton
 import com.michael.nectargroceriesapp.presentation.components.NectarDivider
+import com.michael.nectargroceriesapp.presentation.screens.UiState
 import com.michael.nectargroceriesapp.presentation.screens.common.ErrorMessage
 import com.michael.nectargroceriesapp.presentation.screens.common.LoadingIndicator
 import com.michael.nectargroceriesapp.presentation.screens.product_details.components.Expandable
@@ -44,7 +44,6 @@ import com.michael.nectargroceriesapp.presentation.screens.product_details.compo
 import com.michael.nectargroceriesapp.ui.navigation.BackButton
 import com.michael.nectargroceriesapp.ui.navigation.Routes
 import com.michael.nectargroceriesapp.ui.navigation.safeNavigateSingleTopTo
-import kotlinx.coroutines.delay
 
 @Composable
 fun ProductDetailsScreenRoot(
