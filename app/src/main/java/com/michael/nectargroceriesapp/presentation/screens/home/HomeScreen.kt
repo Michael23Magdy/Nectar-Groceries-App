@@ -56,6 +56,8 @@ fun HomeScreen(
                 .padding(horizontal = 20.dp)
         )
         //TODO: Panels
+        AdvertisementSection(Modifier.padding(20.dp,20.dp,20.dp, 0.dp))
+
         HomeScreenSection(
             name = "Exclusive Offer",
             list = exclusiveOfferProducts.value,
