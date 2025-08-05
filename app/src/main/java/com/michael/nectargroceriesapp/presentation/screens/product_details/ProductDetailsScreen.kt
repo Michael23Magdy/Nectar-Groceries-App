@@ -42,6 +42,9 @@ import com.michael.nectargroceriesapp.presentation.screens.product_details.compo
 import com.michael.nectargroceriesapp.presentation.screens.product_details.components.NumberSelector
 import com.michael.nectargroceriesapp.presentation.screens.product_details.components.StarRating
 import com.michael.nectargroceriesapp.ui.navigation.BackButton
+import com.michael.nectargroceriesapp.ui.navigation.Routes
+import com.michael.nectargroceriesapp.ui.navigation.safeNavigateSingleTopTo
+import kotlinx.coroutines.delay
 
 @Composable
 fun ProductDetailsScreenRoot(
@@ -150,14 +153,13 @@ fun ProductDetailsScreen(
         NectarButton(
             onClick = {
                 viewModel.addToCart(product.id, numberOfWantedUnits)
-            }
-            ,
+                navController.navigate(Routes.CartScreen.route)
+            },
             modifier = Modifier.fillMaxWidth().height(58.dp).padding(20.dp, 0.dp),
         ) {
             Text(text = "Add to Basket", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(10.dp))
         }
     }
-
 }
 
 @Composable
