@@ -77,7 +77,10 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
     implementation("androidx.concurrent:concurrent-futures:1.1.0")
     implementation("com.google.guava:guava:31.1-android")
+    implementation("com.google.code.gson:gson:2.10.1")
 
+    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

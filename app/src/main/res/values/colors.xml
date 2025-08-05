@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="LogoOrange">#F3603F</color>
+    <color name="primaryGreen">#FF53B175</color>
+    <color name="primary">#FF53B175</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="secondary">#FF000000</color>
+    <color name="background">#EDF1EB</color>
 </resources>
